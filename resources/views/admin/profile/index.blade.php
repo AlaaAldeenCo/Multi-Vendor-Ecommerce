@@ -13,10 +13,17 @@
 
         <div class="col-12 col-md-12 col-lg-7">
           <div class="card">
-            <form method="post" class="needs-validation" novalidate="" action="{{route('admin.profile.update')}}">
+            <form method="post" class="needs-validation" novalidate="" action="{{route('admin.profile.update')}}" enctype="multipart/form-data">
                 @csrf
               <div class="card-header">
                 <h4>Update Profile</h4>
+              </div>
+              <div class="form-group col-12">
+                <div class="mb-3">
+                    <img width="100px" src="{{asset(Auth::user()->image)}}" alt="">
+                </div>
+                <label>Image</label>
+                <input type="file" name="image" class="form-control">
               </div>
               <div class="card-body">
                   <div class="row">
@@ -28,7 +35,7 @@
                       <label>Email</label>
                       <input type="text" name="email" class="form-control" value="{{Auth::user()->email}}" required="">
                     </div>
-                  </div>
+                </div>
 
 
               </div>
