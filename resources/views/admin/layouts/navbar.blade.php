@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-expand-lg main-navbar">
     <form class="form-inline mr-auto">
       <ul class="navbar-nav mr-3">
@@ -18,7 +17,7 @@
           <div class="dropdown-list-content dropdown-list-message">
             <a href="#" class="dropdown-item dropdown-item-unread">
               <div class="dropdown-item-avatar">
-                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-1.png')}}" class="rounded-circle">
+                <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle">
                 <div class="is-online"></div>
               </div>
               <div class="dropdown-item-desc">
@@ -29,7 +28,7 @@
             </a>
             <a href="#" class="dropdown-item dropdown-item-unread">
               <div class="dropdown-item-avatar">
-                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-2.png')}}" class="rounded-circle">
+                <img alt="image" src="assets/img/avatar/avatar-2.png" class="rounded-circle">
               </div>
               <div class="dropdown-item-desc">
                 <b>Dedik Sugiharto</b>
@@ -39,7 +38,7 @@
             </a>
             <a href="#" class="dropdown-item dropdown-item-unread">
               <div class="dropdown-item-avatar">
-                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-3.png')}}" class="rounded-circle">
+                <img alt="image" src="assets/img/avatar/avatar-3.png" class="rounded-circle">
                 <div class="is-online"></div>
               </div>
               <div class="dropdown-item-desc">
@@ -50,7 +49,7 @@
             </a>
             <a href="#" class="dropdown-item">
               <div class="dropdown-item-avatar">
-                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-4.png')}}" class="rounded-circle">
+                <img alt="image" src="assets/img/avatar/avatar-4.png" class="rounded-circle">
               </div>
               <div class="dropdown-item-desc">
                 <b>Ardian Rahardiansyah</b>
@@ -60,7 +59,7 @@
             </a>
             <a href="#" class="dropdown-item">
               <div class="dropdown-item-avatar">
-                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-5.png')}}" class="rounded-circle">
+                <img alt="image" src="assets/img/avatar/avatar-5.png" class="rounded-circle">
               </div>
               <div class="dropdown-item-desc">
                 <b>Alfa Zulkarnain</b>
@@ -134,11 +133,11 @@
         </div>
       </li>
       <li class="dropdown"><a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-        <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-1.png')}}" class="rounded-circle mr-1">
+        <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
         <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div></a>
         <div class="dropdown-menu dropdown-menu-right">
           <div class="dropdown-title">Logged in 5 min ago</div>
-          {{-- <a href="{{route('admin.profile')}}" class="dropdown-item has-icon"> --}}
+          <a href="features-profile.html" class="dropdown-item has-icon">
             <i class="far fa-user"></i> Profile
           </a>
           <a href="features-activities.html" class="dropdown-item has-icon">
@@ -148,21 +147,9 @@
             <i class="fas fa-cog"></i> Settings
           </a>
           <div class="dropdown-divider"></div>
-
-          {{-- <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <a href="#" class="dropdown-item has-icon text-danger" onclick="event.preventDefault();
-            this.closest('form').submit();">
+          <a href="#" class="dropdown-item has-icon text-danger">
             <i class="fas fa-sign-out-alt"></i> Logout
           </a>
-          </form> --}}
-
-
-
-
-
-
         </div>
       </li>
     </ul>
