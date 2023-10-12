@@ -36,6 +36,10 @@ class PasswordResetLinkController extends Controller
             $request->only('email')
         );
 
+        // Add alert message for Rest Password
+
+        toastr("Rest link has been sent to your email");
+
         return $status == Password::RESET_LINK_SENT
                     ? back()->with('status', __($status))
                     : back()->withInput($request->only('email'))
