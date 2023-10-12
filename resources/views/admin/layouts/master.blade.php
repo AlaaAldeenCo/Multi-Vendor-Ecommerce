@@ -81,6 +81,7 @@
 
   <!-- Page Specific JS File -->
   <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
   <!-- Template JS File -->
 
