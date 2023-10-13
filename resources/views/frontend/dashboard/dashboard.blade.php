@@ -33,7 +33,7 @@
                   </a>
                 </div>
                 <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item orange" href="dsahboard_profile.html">
+                  <a class="wsus__dashboard_item orange" href="href="{{route('user.profile')}}">
                     <i class="fas fa-user-shield"></i>
                     <p>profile</p>
                   </a>
