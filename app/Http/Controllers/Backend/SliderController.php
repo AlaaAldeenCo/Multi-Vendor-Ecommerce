@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Slider;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Traits\ImageUploadTrait;
+use App\DataTables\SliderDataTable;
+
 
 class SliderController extends Controller
 {
+    use ImageUploadTrait;
 
-    public function index()
+    public function index(SliderDataTable $dataTable)
     {
-        return view('admin.slider.index');
+        return $dataTable->render('admin.slider.index');
     }
 
     /**
@@ -37,6 +41,10 @@ class SliderController extends Controller
        ]);
 
        $slider = new Slider();
+
+       $imagePath = $this->uploadImage($request, 'banner', 'uploads');
+
+       $slider->banner = $imagePath;
        $slider->type = $request->type;
        $slider->title = $request->title;
        $slider->starting_price = $request->starting_price;
