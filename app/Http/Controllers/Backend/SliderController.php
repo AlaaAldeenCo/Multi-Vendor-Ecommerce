@@ -53,7 +53,7 @@ class SliderController extends Controller
        $slider->status = $request->status;
        $slider->save();
        toastr("Slider Created Successfully","success");
-       return redirect()->back();
+       return redirect()->route('admin.slider.index');
     }
 
     /**
@@ -114,4 +114,5 @@ class SliderController extends Controller
         $slider->delete();
         return(['status'=>'success', 'message'=>'Slider Deleted Successfully']);
     }
+    
 }
