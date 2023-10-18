@@ -6,11 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\DataTables\CategoryDataTable;
-<<<<<<< HEAD
-use Str;
-=======
 use  Str;
->>>>>>> 8502124 (Create Category)
+
 class CategoryController extends Controller
 {
     /**
