@@ -110,5 +110,6 @@ class CategoryController extends Controller
 
         return response(['message' => 'Status has been updated!']);
     }
+
     
 }
