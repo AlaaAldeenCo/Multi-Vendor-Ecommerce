@@ -12,7 +12,7 @@ class SubCategory extends Model
     {
         return $this->belongsTo(Category::class);
     }
-    public function ChildCategories()
+    public function childCategories()
     {
         return $this->hasMany(ChildCategory::class);
     }
