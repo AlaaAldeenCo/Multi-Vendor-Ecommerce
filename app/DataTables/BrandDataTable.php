@@ -28,9 +28,9 @@ class BrandDataTable extends DataTable
                 return $editBtn.$deleteBtn;
             })
             ->addColumn('logo', function($query){
-                return "<img width='100px' src='".asset($query->logo)."' ></img>";
-             })
-             ->addColumn('is_featured', function($query){
+               return "<img width='100px' src='".asset($query->logo)."' ></img>";
+            })
+            ->addColumn('is_featured', function($query){
                 $active = '<i class="badge badge-success">Yes</i>';
                 $inActive = '<i class="badge badge-danger">No</i>';
                 if($query->is_featured == 1){
@@ -55,7 +55,6 @@ class BrandDataTable extends DataTable
             })
             ->rawColumns(['logo', 'is_featured', 'status', 'action'])
             ->setRowId('id');
-
     }
 
     /**
@@ -76,7 +75,7 @@ class BrandDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -94,16 +93,17 @@ class BrandDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+
             Column::make('id'),
-            Column::make('logo'),
-            Column::make('name'),
+            Column::make('logo')->width(200),
+            Column::make('name')->width(300),
             Column::make('is_featured'),
             Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(200)
-                  ->addClass('text-center')
+            ->exportable(false)
+            ->printable(false)
+            ->width(200)
+            ->addClass('text-center'),
         ];
     }
 

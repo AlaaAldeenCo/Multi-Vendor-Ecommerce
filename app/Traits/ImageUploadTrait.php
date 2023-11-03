@@ -1,6 +1,6 @@
 <?php
 namespace App\Traits;
-
+use File;
 use Illuminate\Http\Request;
 trait ImageUploadTrait {
 
@@ -42,6 +42,7 @@ trait ImageUploadTrait {
     {
         if(File::exists(public_path($path))){
             File::delete(public_path($path));
+            // unlink($path);
         }
     }
 

@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Http\Controllers\Backend;
-use App\Traits\ImageUploadTrait;
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
 use App\DataTables\BrandDataTable;
+use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Models\Product;
+use App\Traits\ImageUploadTrait;
+use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Cell\IValueBinder;
 use Str;
 
 class BrandController extends Controller
@@ -67,7 +70,7 @@ class BrandController extends Controller
     public function edit(string $id)
     {
         $brand = Brand::findOrFail($id);
-        return view('admin.brand.edit',compact('brand'));
+        return view('admin.brand.edit', compact('brand'));
     }
 
     /**
@@ -102,10 +105,20 @@ class BrandController extends Controller
      */
     public function destroy(string $id)
     {
+        // dd($id);
+
         $brand = Brand::findOrFail($id);
         $this->deleteImage($brand->logo);
         $brand->delete();
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+
+        return response(['status' => 'success', 'Deleted Successfully!']);
+
+
+        // $brand = Brand::findOrFail($id);
+        // $this->deleteImage($brand->logo);
+        
+
+        // return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
     public function changeStatus(Request $request)
@@ -113,6 +126,7 @@ class BrandController extends Controller
         $category = Brand::findOrFail($request->id);
         $category->status = $request->status == 'true' ? 1 : 0;
         $category->save();
+
         return response(['message' => 'Status has been updated!']);
     }
 }
