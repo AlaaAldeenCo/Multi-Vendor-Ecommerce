@@ -10,6 +10,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
+use App\Http\Controllers\Backend\ProductVariantController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -46,4 +47,6 @@ Route::put('product/change-status', [ProductController::class, 'changeStatus'])-
 Route::resource('products', ProductController::class);
 /* Product Image Gallary Route */
 Route::resource('products-image-gallery', ProductImageGalleryController::class);
-
+/* Product Variant Route */
+Route::put('products-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('products-variant.change-status');
+Route::resource('products-variant', ProductVariantController::class);

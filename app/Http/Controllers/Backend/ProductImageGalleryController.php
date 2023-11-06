@@ -75,7 +75,7 @@ class ProductImageGalleryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -83,6 +83,9 @@ class ProductImageGalleryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $productImage = ProductImageGallery::findOrFail($id);
+        $this->deleteImage($productImage->image);
+        $productImage->delete();
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 }
