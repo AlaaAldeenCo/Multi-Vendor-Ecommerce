@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
+use App\Http\Controllers\Backend\ProductVariantItemController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -50,3 +51,9 @@ Route::resource('products-image-gallery', ProductImageGalleryController::class);
 /* Product Variant Route */
 Route::put('products-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('products-variant.change-status');
 Route::resource('products-variant', ProductVariantController::class);
+/** Products variant item route */
+Route::get('products-variant-item/{productId}/{variantId}', [ProductVariantItemController::class, 'index'])->name('products-variant-item.index');
+Route::get('products-variant-item/create/{productId}/{variantId}', [ProductVariantItemController::class, 'create'])->name('products-variant-item.create');
+Route::post('products-variant-item', [ProductVariantItemController::class, 'store'])->name('products-variant-item.store');
+Route::put('products-variant-item-status', [ProductVariantItemController::class, 'chageStatus'])->name('products-variant-item.chages-status');
+
