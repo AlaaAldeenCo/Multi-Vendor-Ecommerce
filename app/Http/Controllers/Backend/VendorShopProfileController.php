@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Vendor;
 
 class VendorShopProfileController extends Controller
 {
@@ -12,7 +14,8 @@ class VendorShopProfileController extends Controller
      */
     public function index()
     {
-        //
+        $profile = Vendor::where('user_id', Auth::user()->id)->first();
+        return view('vendor.shop-profile.index', compact('profile'));
     }
 
     /**

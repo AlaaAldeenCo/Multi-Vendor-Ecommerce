@@ -6,7 +6,7 @@
     <a href="dsahboard.html" class="dash_logo"><img src="images/logo.png" alt="logo" class="img-fluid"></a>
     <ul class="dashboard_link">
 
-      <li><a href="dsahboard_wishlist.html"><i class="far fa-heart"></i>Shop Profile</a></li>
+      <li><a href="{{route('vendor.shop-profile.index')}}"><i class="far fa-heart"></i>Shop Profile</a></li>
       <li><a href="{{route('vendor.profile')}}"><i class="far fa-user"></i> My Profile</a></li>
 
       <li>
