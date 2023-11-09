@@ -6,9 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Vendor;
+use App\Traits\ImageUploadTrait;
+
 
 class VendorShopProfileController extends Controller
 {
+    use ImageUploadTrait;
     /**
      * Display a listing of the resource.
      */
@@ -31,7 +34,34 @@ class VendorShopProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'banner' => ['nullable','image', 'max:3000'],
+            'phone' => ['required', 'max:50'],
+            'shop_name' => ['required', 'max:200'],
+            'email' => ['required', 'email', 'max:200'],
+            'address' => ['required'],
+            'description' => ['required'],
+            'fb_link' => ['nullable', 'url'],
+            'tw_link' => ['nullable', 'url'],
+            'insta_link' => ['nullable', 'url'],
+        ]);
+
+        $vendor = Vendor::where('user_id', Auth::user()->id)->first();
+        $bannerPath = $this->updateImage($request, 'banner', 'uploads', $vendor->banner);
+        $vendor->banner = empty(!$bannerPath) ? $bannerPath : $vendor->banner;
+        $vendor->shop_name = $request->shop_name;
+        $vendor->phone = $request->phone;
+        $vendor->email = $request->email;
+        $vendor->address = $request->address;
+        $vendor->description = $request->description;
+        $vendor->fb_link = $request->fb_link;
+        $vendor->tw_link = $request->tw_link;
+        $vendor->insta_link = $request->insta_link;
+        $vendor->save();
+
+        toastr('Updated Successfully!', 'success');
+
+        return redirect()->back();
     }
 
     /**

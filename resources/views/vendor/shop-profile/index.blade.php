@@ -1,5 +1,4 @@
 @extends('vendor.layouts.master')
-
 @section('content')
   <!--=============================
     DASHBOARD START
