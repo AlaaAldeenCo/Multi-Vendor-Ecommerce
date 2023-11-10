@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\ProductVariant;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ProductVariantItem;
 class VendorProductVariantController extends Controller
 {
         /**
@@ -108,6 +109,11 @@ class VendorProductVariantController extends Controller
         /** Check product vendor */
         if($varinat->product->vendor_id !== Auth::user()->vendor->id){
             abort(404);
+        }
+
+        $variantItemCheck = ProductVariantItem::where('product_variant_id', $varinat->id)->count();
+        if($variantItemCheck > 0){
+            return response(['status' => 'error', 'message' => 'This variant contain variant items in it delete the variant items first for delete this variant!']);
         }
 
         $varinat->delete();

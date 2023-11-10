@@ -18,11 +18,10 @@ class VendorProductImageGalleryController extends Controller
      */
     public function index(Request $request ,VendorProductImageGalleryDataTable $datatable)
     {
-        // $product = Product::where('id',$request->product)->get();
         $product = Product::findOrFail($request->product);
-        // if($product->vendor_id !== Auth::user()->vendor->id){
-        //     abort(404);
-        // }
+        if($product->vendor_id !== Auth::user()->vendor->id){
+            abort(404);
+        }
         return $datatable->render('vendor.product.image-gallery.index', compact('product'));
     }
 
