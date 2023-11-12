@@ -62,3 +62,6 @@ Route::delete('products-variant-item/{variantItemId}', [ProductVariantItemContro
 Route::put('products-variant-item-status', [ProductVariantItemController::class, 'chageStatus'])->name('products-variant-item.chages-status');
 /* Products Sellers Route */
 Route::get('seller-products',[SellerProductController::class,'index'])->name('seller-products.index');
+Route::get('seller-pending-products',[SellerProductController::class,'pendingProducts'])->name('seller-pending-products.index');
+
+
