@@ -18,4 +18,12 @@ class SellerProductController extends Controller
     {
         return $dataTable->render('admin.product.seller-pending-product.index');
     }
+
+    public function changeApproveStatus(Request $request)
+    {
+        $product = Product::findOrFail($request->id);
+        $product->is_approved = $request->value ;
+        $product->save();
+        return response(['message' => 'Product Approve Status Has Been Changed']);
+    }
 }

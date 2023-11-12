@@ -31,7 +31,7 @@
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 
-    {{-- <script>
+     <script>
         $(document).ready(function(){
             $('body').on('click', '.change-status', function(){
                 let isChecked = $(this).is(':checked');
@@ -76,6 +76,6 @@
                 })
 
             })
-        }) --}}
+        })
     </script>
 @endpush
