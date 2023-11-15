@@ -9574,3 +9574,6 @@ a:not([href]):not([class]):hover {
     -o-transition: all linear 0.3s ease;
 }
 
+#sticky_pro_zoom {
+    z-index: 99999 !important;
+}

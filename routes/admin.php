@@ -14,6 +14,7 @@ use App\Http\Controllers\Backend\ProductVariantController;
 use App\Http\Controllers\Backend\ProductVariantItemController;
 use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\FlashSaleController;
+use App\Http\Controllers\Backend\SettingController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -72,3 +73,9 @@ Route::post('flash-sale/add-product',[FlashSaleController::class, 'addProduct'])
 Route::put('flash-sale/show-at-home/status-change', [FlashSaleController::class, 'chageShowAtHomeStatus'])->name('flash-sale.show-at-home.change-status');
 Route::put('flash-sale-status',[FlashSaleController::class, 'changeStatus'])->name('flash-sale-status');
 Route::delete('flash-sale/{id}', [FlashSaleController::class, 'destroy'])->name('flash-sale.destroy');
+/* General Setting Route */
+Route::get('settings',[SettingController::class,'index'])->name('settings.index');
+// Route::put('general-setting-update',[SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+// Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+
