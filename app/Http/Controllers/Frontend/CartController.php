@@ -6,8 +6,18 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
 use App\Models\ProductVariantItem;
+use Illuminate\Support\Facades\Session;
 class CartController extends Controller
 {
+
+    /* Show Cart Details Page */
+    public function cartDetails()
+    {
+        $cartItems = Cart:: content();
+
+        return view('frontend.pages.cart-detail', compact('cartItems'));
+    }
+
     public function addToCart(Request $request)
     {
         // dd($request->variants_items);
@@ -43,7 +53,7 @@ class CartController extends Controller
         $cartData['qty'] = $product->qty;
         $cartData['price'] = $productPrice;
         $cartData['weight'] = 10;
-        $cartData['option']['variants'] = $variants;
+        $cartData['options']['variants'] = $variants;
         $cartData['options']['variants_total'] = $variantTotalAmount;
         $cartData['options']['image'] = $product->thumb_image;
         $cartData['options']['slug'] = $product->slug;
@@ -51,5 +61,12 @@ class CartController extends Controller
         // dd($cartData);
         Cart:: add($cartData);
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
+    }
+
+    public function updateProductQty(Request $request)
+    {
+        // $productId = Cart::get($request->rowId);
+        Cart::update($request->rowId, $request->quantity);
+        return response(['status' => 'success', 'message' => 'Product Quantity Updated!']);
     }
 }

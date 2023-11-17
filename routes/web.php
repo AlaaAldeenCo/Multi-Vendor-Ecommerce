@@ -40,8 +40,10 @@ Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sal
 /* Product Details Route */
 Route::get('product-detail/{slug}', [FrontendProductController::class ,'showProduct'])->name('product-detail');
 
-/* Add To Cart Route */
+/* Cart To Cart Routes */
 Route::post('add-to-cart',[CartController::class, 'addToCart'])->name('add-to-cart');
+Route::get('cart-details',[CartController::class, 'cartDetails'])->name('cart-details');
+Route::post('cart/update-quantity',[CartController::class, 'updateProductQty'])->name('cart.update-quantity');
 
 // User Routes
 
