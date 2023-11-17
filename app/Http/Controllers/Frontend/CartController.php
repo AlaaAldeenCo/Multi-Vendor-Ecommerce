@@ -18,6 +18,7 @@ class CartController extends Controller
         return view('frontend.pages.cart-detail', compact('cartItems'));
     }
 
+    /* Add Product to Cart */
     public function addToCart(Request $request)
     {
         // dd($request->variants_items);
@@ -58,11 +59,12 @@ class CartController extends Controller
         $cartData['options']['image'] = $product->thumb_image;
         $cartData['options']['slug'] = $product->slug;
 
-        // dd($cartData);
+
         Cart:: add($cartData);
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
     }
 
+    /* Update Quantity */
     public function updateProductQty(Request $request)
     {
         $productId = Cart::get($request->rowId)->id;
@@ -82,6 +84,7 @@ class CartController extends Controller
         return response(['status' => 'success', 'message' => 'Product Quantity Updated!', 'product_total' => $productTotal]);
     }
 
+    /* Get Total Price */
     public function getProductTotal($rowId)
     {
         $product = Cart::get($rowId);
@@ -89,4 +92,21 @@ class CartController extends Controller
         return $total;
     }
 
+    /* Clear Cart */
+    public function clearCart()
+    {
+        Cart::destroy();
+        return response(['status' => 'success', 'message' => 'Cart cleared successfully']);
+    }
+
+     /** Remove Product Form Cart */
+    public function removeProduct($rowId)
+    {
+        Cart::remove($rowId);
+        toastr('Product removed succesfully!', 'success', 'Success');
+        return redirect()->back();
+    }
 }
+
+
+
