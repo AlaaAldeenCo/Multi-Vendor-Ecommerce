@@ -226,51 +226,51 @@
                                 <h5>offer ending time : </h5>
                                 <div class="simply-countdown simply-countdown-one"></div>
                             </div> --}}
-                            <div class="wsus__selectbox">
-                                <div class="row">
+                            <form class="shopping-cart-form">
+                                <div class="wsus__selectbox">
+                                    <div class="row">
+                                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                                        @foreach ($product->variants as $variant)
+                                            <div class="col-xl-6 col-sm-6">
+                                                <h5 class="mb-2">{{$variant->name}}:</h5>
 
-                                    @foreach ($product->variants as $variant)
+                                                <select class="select_2" name="variants_items[]">
+                                                    @foreach ($variant->productVariantItems as $variantItem)
+                                                    {{-- <option>default select</option> --}}
+                                                    <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
+                                                    @endforeach
+                                                </select>
 
+                                            </div>
 
-
-                                        <div class="col-xl-6 col-sm-6">
-                                            <h5 class="mb-2">{{$variant->name}}:</h5>
-
-                                            <select class="select_2" name="state">
-                                                @foreach ($variant->productVariantItems as $variantItem)
-                                                {{-- <option>default select</option> --}}
-                                                <option {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
-                                                @endforeach
-                                            </select>
-
-
-                                        </div>
-
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="wsus_pro__det_size">
-                                <h5>size :</h5>
-                                <ul>
-                                    <li><a href="#">S</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                </ul>
-                            </div>
-                            <div class="wsus__quentity">
-                                <h5>quentity :</h5>
-                                <form class="select_number">
-                                    <input class="number_area" type="text" min="1" max="100" value="1" />
-                                </form>
-                            </div>
+                                {{-- <div class="wsus_pro__det_size">
+                                    <h5>size :</h5>
+                                    <ul>
+                                        <li><a href="#">S</a></li>
+                                        <li><a href="#">M</a></li>
+                                        <li><a href="#">L</a></li>
+                                        <li><a href="#">XL</a></li>
+                                    </ul>
+                                </div> --}}
+                                <div class="wsus__quentity">
+                                    <h5>quentity :</h5>
+                                    <div class="select_number">
+                                        <input class="number_area" name="qty" type="text" min="1" max="100" value="1" />
+                                    </div>
+                                </div>
 
-                            <ul class="wsus__button_area">
-                                <li><a class="add_cart" href="#">add to cart</a></li>
-                                <li><a class="buy_now" href="#">buy now</a></li>
-                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                <li><a href="#"><i class="far fa-random"></i></a></li>
-                            </ul>
+                                <ul class="wsus__button_area">
+                                    <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
+                                    <li><a class="buy_now" href="#">buy now</a></li>
+                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                    <li><a href="#"><i class="far fa-random"></i></a></li>
+                                </ul>
+
+                            </form>
+
                             <p class="brand_model"><span>brand :</span> {{$product->brand->name}}</p>
                         </div>
                     </div>
@@ -572,7 +572,7 @@
     <!--============================
         RELATED PRODUCT START
     ==============================-->
-    <section id="wsus__flash_sell">
+    {{-- <section id="wsus__flash_sell">
         <div class="container">
             <div class="row">
                 <div class="col-xl-12">
@@ -733,7 +733,7 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--============================
         RELATED PRODUCT END
     ==============================-->
@@ -742,3 +742,41 @@
 
 
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $('.shopping-cart-form').on('submit', function(e) {
+                    e.preventDefault();
+                    let formData = $(this).serialize();
+
+                    $.ajax({
+                        method: 'POST',
+                        data: formData,
+                        url: "{{ route('add-to-cart') }}",
+                        success: function(data) {
+                            if(data.status === 'success'){
+                                getCartCount()
+                                fetchSidebarCartProducts()
+                                $('.mini_cart_actions').removeClass('d-none');
+                                toastr.success(data.message);
+                            }else if (data.status === 'error'){
+                                toastr.error(data.message);
+                            }
+                        },
+                        error: function(data) {
+
+                        }
+                    })
+                })
+        })
+
+
+    </script>
+@endpush

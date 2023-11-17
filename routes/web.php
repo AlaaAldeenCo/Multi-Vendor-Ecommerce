@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\FlashSaleController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
+use App\Http\Controllers\Frontend\CartController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,6 +39,10 @@ Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sal
 
 /* Product Details Route */
 Route::get('product-detail/{slug}', [FrontendProductController::class ,'showProduct'])->name('product-detail');
+
+/* Add To Cart Route */
+Route::post('add-to-cart',[CartController::class, 'addToCart'])->name('add-to-cart');
+
 // User Routes
 
 Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'],function(){

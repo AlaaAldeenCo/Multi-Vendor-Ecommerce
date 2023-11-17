@@ -1,4 +1,7 @@
 @extends('frontend.dashboard.layouts.master')
+@section('title')
+{{$settings->site_name}} || e-Commerce HTML Template
+@endsection
 @section('content')
 <section id="wsus__dashboard">
     <div class="container-fluid">
@@ -45,7 +48,7 @@
                   </a>
                 </div>
               </div>
-              
+
             </div>
           </div>
         </div>
