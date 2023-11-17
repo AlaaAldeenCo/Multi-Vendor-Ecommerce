@@ -65,6 +65,18 @@ class CartController extends Controller
 
     public function updateProductQty(Request $request)
     {
+        $productId = Cart::get($request->rowId)->id;
+        $product = Product::findOrFail($productId);
+        if($product->qty ===0)
+        {
+            return response(['status' => 'error', 'message' => 'Product stock out']);
+        }
+
+        else if($product->qty < $request->qty)
+        {
+            return response(['status' => 'error', 'message' => 'Quantity not available in our stock']);
+        }
+
         Cart::update($request->rowId, $request->quantity);
         $productTotal = $this->getProductTotal($request->rowId);
         return response(['status' => 'success', 'message' => 'Product Quantity Updated!', 'product_total' => $productTotal]);

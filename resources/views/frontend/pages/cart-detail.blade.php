@@ -310,6 +310,47 @@
                 }
             })
         })
+
+        // decrement product quantity
+        $('.product-decrement').on('click', function(){
+            let input = $(this).siblings('.product-qty');
+            let quantity = parseInt(input.val()) - 1;
+            let rowId = input.data('rowid');
+
+            if(quantity < 1){
+                quantity = 1;
+            }
+
+            input.val(quantity);
+
+            $.ajax({
+                url: "{{route('cart.update-quantity')}}",
+                method: 'POST',
+                data: {
+                    rowId: rowId,
+                    quantity: quantity
+                },
+                success: function(data){
+                    if(data.status === 'success'){
+                        let productId = '#'+rowId;
+                        let totalAmount = "{{$settings->currency_icon}}"+data.product_total
+                        $(productId).text(totalAmount)
+
+                        // renderCartSubTotal()
+                        // calculateCouponDescount()
+
+                        toastr.success(data.message)
+                    }else if (data.status === 'error'){
+                        toastr.error(data.message)
+                    }
+                },
+                error: function(data){
+
+                }
+            })
+
+        })
+
     })
 </script>
 @endpush
