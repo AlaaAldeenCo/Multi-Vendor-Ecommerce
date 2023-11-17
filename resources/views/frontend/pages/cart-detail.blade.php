@@ -293,9 +293,9 @@
                 },
                 success: function(data){
                     if(data.status === 'success'){
-                    //     let productId = '#'+rowId;
-                    //     let totalAmount = "{{$settings->currency_icon}}"+data.product_total
-                    //     $(productId).text(totalAmount)
+                        let productId = '#'+rowId;
+                        let totalAmount = "{{$settings->currency_icon}}"+data.product_total
+                        $(productId).text(totalAmount)
 
                     //     renderCartSubTotal()
                     //     calculateCouponDescount()
