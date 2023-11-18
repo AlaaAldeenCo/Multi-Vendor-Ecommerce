@@ -763,8 +763,8 @@
                         success: function(data) {
                             if(data.status === 'success'){
                                 getCartCount()
-                                fetchSidebarCartProducts()
-                                $('.mini_cart_actions').removeClass('d-none');
+                                // fetchSidebarCartProducts()
+                                // $('.mini_cart_actions').removeClass('d-none');
                                 toastr.success(data.message);
                             }else if (data.status === 'error'){
                                 toastr.error(data.message);
@@ -775,6 +775,20 @@
                         }
                     })
                 })
+
+                // Cart Count
+        function getCartCount() {
+            $.ajax({
+                method: 'GET',
+                url: "{{ route('cart-count') }}",
+                success: function(data) {
+                    $('#cart-count').text(data);
+                },
+                error: function(data) {
+
+                }
+            })
+        }
         })
 
 

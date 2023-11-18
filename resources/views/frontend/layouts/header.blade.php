@@ -37,7 +37,7 @@
                         <li><a href="wishlist.html"><i class="fal fa-heart"></i><span>05</span></a></li>
                         <li><a href="compare.html"><i class="fal fa-random"></i><span>03</span></a></li>
                         <li><a class="wsus__cart_icon" href="#"><i
-                                    class="fal fa-shopping-bag"></i><span>04</span></a></li>
+                                    class="fal fa-shopping-bag"></i><span id="cart-count">{{Cart::content()->count()}}</span></a></li>
                     </ul>
                 </div>
             </div>
@@ -46,17 +46,31 @@
     <div class="wsus__mini_cart">
         <h4>shopping cart <span class="wsus_close_mini_cart"><i class="far fa-times"></i></span></h4>
         <ul>
-            <li>
-                <div class="wsus__cart_img">
-                    <a href="#"><img src="images/tab_2.jpg" alt="product" class="img-fluid w-100"></a>
-                    <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                </div>
-                <div class="wsus__cart_text">
-                    <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view display</a>
-                    <p>$140 <del>$150</del></p>
-                </div>
-            </li>
-            <li>
+
+            @foreach (Cart::content() as $sidebarProduct)
+
+                <li>
+                    <div class="wsus__cart_img">
+                        <a href="#"><img src="{{asset($sidebarProduct->options->image)}}" alt="product" class="img-fluid w-100"></a>
+                        <a class="wsis__del_icon remove_sidebar_product" data-id="{{$sidebarProduct->rowId}}" href="#"><i class="fas fa-minus-circle"></i></a>
+                    </div>
+                    <div class="wsus__cart_text">
+                        <a class="wsus__cart_title" href="{{route('product-detail', $sidebarProduct->options->slug)}}">{{$sidebarProduct->name}}</a>
+                        <p>{{$settings->currency_icon}}{{$sidebarProduct->price}}</p>
+                        <small>Variants total: {{$settings->currency_icon}}{{$sidebarProduct->options->variants_total}}</small>
+                        <br>
+                        <small>Qty: {{$sidebarProduct->qty}}</small>
+                    </div>
+                </li>
+
+            @endforeach
+
+            @if (Cart::content()->count() === 0)
+                <li class="text-center">Cart Is Empty!</li>
+            @endif
+
+
+            {{-- <li>
                 <div class="wsus__cart_img">
                     <a href="#"><img src="images/pro4.jpg" alt="product" class="img-fluid w-100"></a>
                     <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
@@ -95,7 +109,7 @@
                     <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view display</a>
                     <p>$140 <del>$150</del></p>
                 </div>
-            </li>
+            </li> --}}
         </ul>
         <h5>sub total <span>$3540</span></h5>
         <div class="wsus__minicart_btn_area">

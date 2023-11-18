@@ -51,7 +51,7 @@ class CartController extends Controller
         $cartData = [];
         $cartData['id'] = $product->id;
         $cartData['name'] = $product->name;
-        $cartData['qty'] = $product->qty;
+        $cartData['qty'] = $request->qty;
         $cartData['price'] = $productPrice;
         $cartData['weight'] = 10;
         $cartData['options']['variants'] = $variants;
@@ -105,6 +105,10 @@ class CartController extends Controller
         Cart::remove($rowId);
         toastr('Product removed succesfully!', 'success', 'Success');
         return redirect()->back();
+    }
+    public function getCartCount()
+    {
+        return Cart::content()->count();
     }
 }
 

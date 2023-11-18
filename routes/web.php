@@ -46,6 +46,7 @@ Route::get('cart-details',[CartController::class, 'cartDetails'])->name('cart-de
 Route::post('cart/update-quantity',[CartController::class, 'updateProductQty'])->name('cart.update-quantity');
 Route::get('clear-cart',[CartController::class, 'clearCart'])->name('clear.cart');
 Route::get('cart/remove-product/{rowId}', [CartController::class, 'removeProduct'])->name('cart.remove-product');
+Route::get('cart-count', [CartController::class, 'getCartCount'])->name('cart-count');
 
 // User Routes
 
