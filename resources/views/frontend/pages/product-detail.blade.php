@@ -763,7 +763,7 @@
                         success: function(data) {
                             if(data.status === 'success'){
                                 getCartCount()
-                                // fetchSidebarCartProducts()
+                                fetchSidebarCartProducts()
                                 // $('.mini_cart_actions').removeClass('d-none');
                                 toastr.success(data.message);
                             }else if (data.status === 'error'){
@@ -789,7 +789,107 @@
                 }
             })
         }
+
+
+        function fetchSidebarCartProducts() {
+            $.ajax({
+                method: 'GET',
+                url: "{{ route('cart-products') }}",
+                success: function(data) {
+                    console.log(data);
+                    $('.mini_cart_wrapper').html("");
+                    var html = '';
+                    for( let item in data)
+                    {
+                        let product = data[item]
+                        html+=`
+                            <li id ="mini_cart_${product.rowId}">
+                                <div class="wsus__cart_img">
+                                    <a href=""><img src="{{asset('/')}}${product.options.image}" alt="product" class="img-fluid w-100"></a>
+                                    <a class="wsis__del_icon remove_sidebar_product" data-id="${product.rowId}" href=""><i class="fas fa-minus-circle"></i></a>
+                                </div>
+                                <div class="wsus__cart_text">
+                                    <a class="wsus__cart_title" href="{{url('product-detail')}}/${product.options.slug}">${product.name}</a>
+                                    <p>{{$settings->currency_icon}}${product.price}</p>
+                                </div>
+                            </li>`
+
+                    }
+                    $('.mini_cart_wrapper').html(html);
+                    // $('.mini_cart_wrapper').html("");
+                    // var html = '';
+                    // for (let item in data) {
+                    //     let product = data[item];
+                    //     html += `
+                    //     <li id="mini_cart_${product.rowId}">
+                    //         <div class="wsus__cart_img">
+                    //             <a href="{{ url('product-detail') }}/${product.options.slug}"><img src="{{ asset('/') }}${product.options.image}" alt="product" class="img-fluid w-100"></a>
+                    //             <a class="wsis__del_icon remove_sidebar_product" data-id="${product.rowId}" href=""><i class="fas fa-minus-circle"></i></a>
+                    //         </div>
+                    //         <div class="wsus__cart_text">
+                    //             <a class="wsus__cart_title" href="{{ url('product-detail') }}/${product.options.slug}">${product.name}</a>
+                    //             <p>{{ $settings->currency_icon }}${product.price}</p>
+                    //             <small>Variants total: {{ $settings->currency_icon }}${product.options.variants_total}</small>
+                    //             <br>
+                    //             <small>Qty: ${product.qty}</small>
+                    //         </div>
+                    //     </li>`
+                    // }
+
+                    // $('.mini_cart_wrapper').html(html);
+
+                    // getSidebarCartSubtoal();
+
+                },
+                error: function(data) {
+
+                }
+            })
+        }
+
+
+         // reomove product from sidebar cart
+         $('body').on('click', '.remove_sidebar_product', function(e) {
+            e.preventDefault()
+            let rowId = $(this).data('id');
+            // let rowId = $(this).data('id');
+            console.log(rowId)
+
+            $.ajax({
+                method: 'POST',
+                url: "{{ route('cart.remove-sidebar-product') }}",
+                data: {
+                    rowId: rowId
+                },
+                success: function(data) {
+                    let productId = '#mini_cart_'+rowId
+                    $(productId).remove()
+                    // let productId = '#mini_cart_' + rowId;
+                    // $(productId).remove()
+
+                    // getSidebarCartSubtoal()
+
+                    // if ($('.mini_cart_wrapper').find('li').length === 0) {
+                    //     $('.mini_cart_actions').addClass('d-none');
+                    //     $('.mini_cart_wrapper').html(
+                    //         '<li class="text-center">Cart Is Empty!</li>');
+                    // }
+                    toastr.success(data.message)
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
         })
+
+
+
+        })
+
+
+
+
+
 
 
     </script>
