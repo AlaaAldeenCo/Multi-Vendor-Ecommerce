@@ -172,81 +172,50 @@
                                         </p>
                                         <p class="description">{!! $product->short_description !!}</p>
 
-                                        <div class="wsus__selectbox">
-                                            <div class="row">
-                                                <input type="hidden" name="product_id" value="{{$product->id}}">
-                                                @foreach ($product->variants as $variant)
-                                                    <div class="col-xl-6 col-sm-6">
-                                                        <h5 class="mb-2">{{$variant->name}}:</h5>
+                                        <form class="shopping-cart-form">
+                                            <div class="wsus__selectbox">
+                                                <div class="row">
+                                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                                    @foreach ($product->variants as $variant)
+                                                        <div class="col-xl-6 col-sm-6">
+                                                            <h5 class="mb-2">{{$variant->name}}:</h5>
 
-                                                        <select class="select_2" name="variants_items[]">
-                                                            @foreach ($variant->productVariantItems as $variantItem)
-                                                            {{-- <option>default select</option> --}}
-                                                            <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
-                                                            @endforeach
-                                                        </select>
+                                                            <select class="select_2" name="variants_items[]">
+                                                                @foreach ($variant->productVariantItems as $variantItem)
+                                                                {{-- <option>default select</option> --}}
+                                                                <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
+                                                                @endforeach
+                                                            </select>
 
-                                                    </div>
+                                                        </div>
 
-                                                @endforeach
-                                            </div>
-                                        </div>
-
-                                        {{-- <div class="wsus_pro_det_color">
-                                            <h5>color :</h5>
-                                            <ul>
-                                                <li><a class="blue" href="#"><i class="far fa-check"></i></a></li>
-                                                <li><a class="orange" href="#"><i class="far fa-check"></i></a></li>
-                                                <li><a class="yellow" href="#"><i class="far fa-check"></i></a></li>
-                                                <li><a class="black" href="#"><i class="far fa-check"></i></a></li>
-                                                <li><a class="red" href="#"><i class="far fa-check"></i></a></li>
-                                            </ul>
-                                        </div>
-                                        <div class="wsus_pro__det_size">
-                                            <h5>size :</h5>
-                                            <ul>
-                                                <li><a href="#">S</a></li>
-                                                <li><a href="#">M</a></li>
-                                                <li><a href="#">L</a></li>
-                                                <li><a href="#">XL</a></li>
-                                            </ul>
-                                        </div> --}}
-                                        <div class="wsus__quentity">
-                                            <h5>quentity :</h5>
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </div>
-                                        {{-- <div class="wsus__selectbox">
-                                            <div class="row">
-                                                <div class="col-xl-6 col-sm-6">
-                                                    <h5 class="mb-2">select:</h5>
-                                                    <select class="select_2" name="state">
-                                                        <option>default select</option>
-                                                        <option>select 1</option>
-                                                        <option>select 2</option>
-                                                        <option>select 3</option>
-                                                        <option>select 4</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-xl-6 col-sm-6">
-                                                    <h5 class="mb-2">select:</h5>
-                                                    <select class="select_2" name="state">
-                                                        <option>default select</option>
-                                                        <option>select 1</option>
-                                                        <option>select 2</option>
-                                                        <option>select 3</option>
-                                                        <option>select 4</option>
-                                                    </select>
+                                                    @endforeach
                                                 </div>
                                             </div>
-                                        </div> --}}
-                                        <ul class="wsus__button_area">
-                                            <li><a class="add_cart" href="#">add to cart</a></li>
-                                            <li><a class="buy_now" href="#">buy now</a></li>
-                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="far fa-random"></i></a></li>
-                                        </ul>
+                                            {{-- <div class="wsus_pro__det_size">
+                                                <h5>size :</h5>
+                                                <ul>
+                                                    <li><a href="#">S</a></li>
+                                                    <li><a href="#">M</a></li>
+                                                    <li><a href="#">L</a></li>
+                                                    <li><a href="#">XL</a></li>
+                                                </ul>
+                                            </div> --}}
+                                            <div class="wsus__quentity">
+                                                <h5>quentity :</h5>
+                                                <div class="select_number">
+                                                    <input class="number_area" name="qty" type="text" min="1" max="100" value="1" />
+                                                </div>
+                                            </div>
+
+                                            <ul class="wsus__button_area">
+                                                <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
+                                                <li><a class="buy_now" href="#">buy now</a></li>
+                                                <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="far fa-random"></i></a></li>
+                                            </ul>
+
+                                        </form>
                                         <p class="brand_model"><span>brand :</span>{{$product->brand->name}}</p>
                                         {{-- <div class="wsus__pro_det_share">
                                             <h5>share :</h5>

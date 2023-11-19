@@ -109,13 +109,21 @@
                     <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view display</a>
                     <p>$140 <del>$150</del></p>
                 </div>
-            </li> --}}
+            {{-- </li> --}}
+            {{-- @if (Cart::content()->count() === 0)
+                <li class="text-center">Cart Is Empty!</li>
+            @endif --}} 
         </ul>
-        <h5>sub total <span>$3540</span></h5>
-        <div class="wsus__minicart_btn_area">
-            <a class="common_btn" href="{{route('cart-details')}}">view cart</a>
-            <a class="common_btn" href="check_out.html">checkout</a>
+        <div class="mini_cart_actions {{Cart::content()->count() === 0 ? 'd-none' : ''}}">
+
+            <h5>sub total <span id ="mini_cart_subtotal">{{$settings->currency_icon}}{{getCartTotal()}}</span></h5>
+            <div class="wsus__minicart_btn_area">
+                <a class="common_btn" href="{{route('cart-details')}}">view cart</a>
+                <a class="common_btn" href="check_out.html">checkout</a>
+            </div>
+
         </div>
+
     </div>
 
 </header>

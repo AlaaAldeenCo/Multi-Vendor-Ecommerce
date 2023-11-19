@@ -106,20 +106,35 @@ class CartController extends Controller
         toastr('Product removed succesfully!', 'success', 'Success');
         return redirect()->back();
     }
+
+    // Get Cart Count
     public function getCartCount()
     {
         return Cart::content()->count();
     }
 
+    // Get Cart Products
     public function getCartProducts()
     {
         return Cart::content();
     }
 
+    //Remove Sidebar Product
     public function removeSidebarProduct(Request $request)
     {
         Cart::remove($request->rowId);
         return response(['status' => 'success', 'message' => 'Product removed successfully!']);
+    }
+
+    // Get Cart Sidebar Total
+    public function getCartTotal()
+    {
+        $total =0;
+        foreach(Cart::content() as $product)
+        {
+            $total+= $this->getProductTotal($product->rowId);
+        }
+        return $total;
     }
 }
 
