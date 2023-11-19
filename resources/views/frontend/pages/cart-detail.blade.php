@@ -54,7 +54,7 @@
                                         </th>
 
                                         <th class="wsus__pro_tk">
-                                            price
+                                           unit price
                                         </th>
 
                                         <th class="wsus__pro_tk">
@@ -71,9 +71,7 @@
                                             <a href="#" class="common_btn clear_cart">clear cart</a>
                                         </th>
                                     </tr>
-
                                     @foreach ($cartItems as $item)
-
                                     <tr class="d-flex">
                                         <td class="wsus__pro_img"><img src="{{asset($item->options->image)}}" alt="product"
                                                 class="img-fluid w-100">
@@ -82,19 +80,14 @@
                                         <td class="wsus__pro_name">
                                             <p>{!! $item->name !!}</p>
                                             @foreach ($item->options->variants as $key => $variant)
-                                            <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon.$variant['price']}})</span>
+                                                <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon.$variant['price']}})</span>
                                             @endforeach
-
 
                                         </td>
 
                                         <td class="wsus__pro_tk">
                                             <h6>{{$settings->currency_icon.$item->price}}</h6>
                                         </td>
-
-                                        {{-- <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td> --}}
 
                                         <td class="wsus__pro_tk">
                                             <h6 id="{{$item->rowId}}">{{$settings->currency_icon.($item->price + $item->options->variants_total) * $item->qty}}</h6>
@@ -108,15 +101,10 @@
                                             </div>
                                         </td>
 
-                                        {{-- <td class="wsus__pro_tk">
-                                            <h6>{{$settings->currency_icon.$item->price}}</h6>
-                                        </td> --}}
-
                                         <td class="wsus__pro_icon">
                                             <a href="{{route('cart.remove-product', $item->rowId)}}"><i class="far fa-times"></i></a>
                                         </td>
                                     </tr>
-
                                     @endforeach
 
                                     @if (count($cartItems) === 0)
@@ -128,91 +116,6 @@
 
                                     @endif
 
-                                    {{-- <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/pro4.jpg" alt="product" class="img-fluid w-100">
-                                        </td>
-
-                                        <td class="wsus__pro_name">
-                                            <p>mean's casula fashion watch</p>
-                                            <span>color: black</span>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$140,00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/blazer_1.jpg" alt="product" class="img-fluid w-100">
-                                        </td>
-
-                                        <td class="wsus__pro_name">
-                                            <p>product name and details</p>
-                                            <span>color: black</span>
-                                            <span>size: M</span>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <span>almost gone</span>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$220,00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr class="d-flex">
-                                        <td class="wsus__pro_img">
-                                            <img src="images/pro2.jpg" alt="product" class="img-fluid w-100">
-                                        </td>
-                                        <td class="wsus__pro_name">
-                                            <p>product name and details</p>
-                                            <span>color: black</span>
-                                            <span>size: L</span>
-                                        </td>
-
-                                        <td class="wsus__pro_status">
-                                            <p>in stock</p>
-                                        </td>
-
-                                        <td class="wsus__pro_select">
-                                            <form class="select_number">
-                                                <input class="number_area" type="text" min="1" max="100" value="1" />
-                                            </form>
-                                        </td>
-
-                                        <td class="wsus__pro_tk">
-                                            <h6>$180.00</h6>
-                                        </td>
-
-                                        <td class="wsus__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr> --}}
                                 </tbody>
                             </table>
                         </div>
@@ -221,7 +124,7 @@
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
-                        <p>subtotal: <span>$124.00</span></p>
+                        <p>subtotal: <span id="sub_total">{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
                         <p>delivery: <span>$00.00</span></p>
                         <p>discount: <span>$10.00</span></p>
                         <p class="total"><span>total:</span> <span>$134.00</span></p>
@@ -305,8 +208,8 @@
                         let totalAmount = "{{$settings->currency_icon}}"+data.product_total
                         $(productId).text(totalAmount)
 
-                    //     renderCartSubTotal()
-                    //     calculateCouponDescount()
+                        renderCartSubTotal()
+
 
                         toastr.success(data.message)
                     }else if (data.status === 'error'){
@@ -344,8 +247,8 @@
                         let totalAmount = "{{$settings->currency_icon}}"+data.product_total
                         $(productId).text(totalAmount)
 
-                        // renderCartSubTotal()
-                        // calculateCouponDescount()
+                        renderCartSubTotal()
+
 
                         toastr.success(data.message)
                     }else if (data.status === 'error'){
@@ -389,7 +292,21 @@
                 })
         })
 
-        
+        // get subtotal of cart and put it on dom
+        function renderCartSubTotal(){
+            $.ajax({
+                method: 'GET',
+                url: "{{ route('cart.sidebar-product-total') }}",
+                success: function(data) {
+                    $('#sub_total').text("{{$settings->currency_icon}}"+data);
+                    console.log(data);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
+        }
+
 
     })
 </script>

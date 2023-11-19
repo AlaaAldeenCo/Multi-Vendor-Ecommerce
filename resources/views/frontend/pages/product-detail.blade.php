@@ -154,7 +154,7 @@
                     <div class="col-12">
                         <h4>products details</h4>
                         <ul>
-                            <li><a href="#">home</a></li>
+                            <li><a href="{{url('/')}}">home</a></li>
                             <li><a href="#">peoduct</a></li>
                             <li><a href="#">product details</a></li>
                         </ul>
@@ -205,7 +205,11 @@
                     <div class="col-xl-5 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascript:;">{{$product->name}}</a>
-                            <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
+                            @if ($product->qty > 0)
+                                <p class="wsus__stock_area"><span class="in_stock">in stock</span> ({{$product->qty}} item)</p>
+                            @elseif ($product->qty === 0)
+                                <p class="wsus__stock_area"><span class="in_stock">stock out</span> ({{$product->qty}} item)</p>
+                            @endif
                             @if (checkDiscount($product))
                             <h4>{{$settings->currency_icon}}{{$product->offer_price}} <del>{{$settings->currency_icon}}{{$product->price}}</del></h4>
                             @else
@@ -231,17 +235,24 @@
                                     <div class="row">
                                         <input type="hidden" name="product_id" value="{{$product->id}}">
                                         @foreach ($product->variants as $variant)
-                                            <div class="col-xl-6 col-sm-6">
-                                                <h5 class="mb-2">{{$variant->name}}:</h5>
 
-                                                <select class="select_2" name="variants_items[]">
-                                                    @foreach ($variant->productVariantItems as $variantItem)
-                                                    {{-- <option>default select</option> --}}
-                                                    <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
-                                                    @endforeach
-                                                </select>
+                                            @if ($variant->status !=0)
 
-                                            </div>
+                                                <div class="col-xl-6 col-sm-6">
+                                                    <h5 class="mb-2">{{$variant->name}}:</h5>
+
+                                                    <select class="select_2" name="variants_items[]">
+                                                        @foreach ($variant->productVariantItems as $variantItem)
+                                                            @if ($variantItem->status != 0)
+                                                                <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected': ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
+                                                            @endif
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+
+                                            @endif
+
 
                                         @endforeach
                                     </div>

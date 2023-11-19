@@ -14,6 +14,10 @@ class CartController extends Controller
     public function cartDetails()
     {
         $cartItems = Cart:: content();
+        if(count($cartItems) === 0)
+        {
+            return redirect()->route('home');
+        }
 
         return view('frontend.pages.cart-detail', compact('cartItems'));
     }
@@ -21,8 +25,20 @@ class CartController extends Controller
     /* Add Product to Cart */
     public function addToCart(Request $request)
     {
-        // dd($request->variants_items);
+
         $product = Product::findOrFail($request->product_id);
+
+        // Check Product Quntity
+        if($product->qty === 0)
+        {
+            return response(['status' => 'error', 'message' => 'Product stock out']);
+        }
+
+        if($product->qty < $request->qty)
+        {
+            return response(['status' => 'error', 'message' => 'Quantity not available in our stock']);
+        }
+
         $variants=[];
         $variantTotalAmount = 0;
         if($request->has('variants_items'))
@@ -69,20 +85,20 @@ class CartController extends Controller
     {
         $productId = Cart::get($request->rowId)->id;
         $product = Product::findOrFail($productId);
-        if($product->qty ===0)
-        {
-            return response(['status' => 'error', 'message' => 'Product stock out']);
-        }
 
-        else if($product->qty < $request->qty)
-        {
+        // check product quantity
+        if($product->qty === 0){
+            return response(['status' => 'error', 'message' => 'Product stock out']);
+        }else if($product->qty < $request->qty){
             return response(['status' => 'error', 'message' => 'Quantity not available in our stock']);
         }
 
         Cart::update($request->rowId, $request->quantity);
         $productTotal = $this->getProductTotal($request->rowId);
+
         return response(['status' => 'success', 'message' => 'Product Quantity Updated!', 'product_total' => $productTotal]);
     }
+
 
     /* Get Total Price */
     public function getProductTotal($rowId)
