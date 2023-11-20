@@ -175,6 +175,32 @@ class CartController extends Controller
             return response(['status' => 'error', 'message' => 'Coupon is expired']);
         }
 
+        elseif($coupon->total_used >= $coupon->quantity)
+        {
+            return response(['status' => 'error', 'message' => 'you can not apply this coupon']);
+        }
+
+        if($coupon->discount_type === 'amount')
+        {
+            Session::put('coupon',[
+                'coupon_name' => $coupon->name,
+                'coupon_code' => $coupon->code,
+                'discount_type' => 'amont',
+                'discount' => $coupon->discount
+            ]);
+        }
+
+        elseif($coupon->discount_type === 'percent')
+        {
+            Session::put('coupon', [
+                'coupon_name' => $coupon->name,
+                'coupon_code' => $coupon->code,
+                'discount_type' => 'percent',
+                'discount' => $coupon->discount
+            ]);
+        }
+
+
         // dd($coupon);
     }
 }
