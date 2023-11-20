@@ -40,7 +40,7 @@ Route::get('flash-sale', [FlashSaleController::class, 'index'])->name('flash-sal
 /* Product Details Route */
 Route::get('product-detail/{slug}', [FrontendProductController::class ,'showProduct'])->name('product-detail');
 
-/* Cart To Cart Routes */
+/* Cart Routes */
 Route::post('add-to-cart',[CartController::class, 'addToCart'])->name('add-to-cart');
 Route::get('cart-details',[CartController::class, 'cartDetails'])->name('cart-details');
 Route::post('cart/update-quantity',[CartController::class, 'updateProductQty'])->name('cart.update-quantity');
@@ -50,6 +50,9 @@ Route::get('cart-count', [CartController::class, 'getCartCount'])->name('cart-co
 Route::get('cart-products', [CartController::class, 'getCartProducts'])->name('cart-products');
 Route::post('cart/remove-sidebar-product', [CartController::class, 'removeSidebarProduct'])->name('cart.remove-sidebar-product');
 Route::get('cart/sidebar-product-total', [CartController::class, 'getCartTotal'])->name('cart.sidebar-product-total');
+
+/* Coupon Routes */
+Route::get('apply-coupon', [CartController::class, 'applyCoupon'])->name('apply-coupon');
 
 
 
