@@ -125,17 +125,15 @@
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
                         <p>subtotal: <span id="sub_total">{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
-                        <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span>$10.00</span></p>
-                        <p class="total"><span>total:</span> <span>$134.00</span></p>
+                        <p>coupon(-): <span id="discount">{{$settings->currency_icon}}{{getCartDiscount()}}</span></p>
+                        <p class="total"><span>total:</span> <span id= "cart_total">{{$settings->currency_icon}}{{getMainCartTotal()}}</span></p>
 
                         <form id="coupon_form">
-                            <input type="text" placeholder="Coupon Code" name="coupon_code">
+                            <input type="text" placeholder="Coupon Code" name="coupon_code" value="{{session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}">
                             <button type="submit" class="common_btn">apply</button>
                         </form>
                         <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
-                        <a class="common_btn mt-1 w-100 text-center" href="product_grid_view.html"><i
-                                class="fab fa-shopify"></i> go shop</a>
+                        <a class="common_btn mt-1 w-100 text-center" href="{{route('home')}}"><i class="fab fa-shopify"></i> Keep Shopping</a>
                     </div>
                 </div>
             </div>
@@ -188,7 +186,7 @@
             }
         });
 
-        // incriment product quantity
+        // Increment Product Quantity
         $('.product-increment').on('click', function(){
             let input = $(this).siblings('.product-qty');
             let quantity = parseInt(input.val()) + 1;
@@ -209,7 +207,7 @@
                         $(productId).text(totalAmount)
 
                         renderCartSubTotal()
-
+                        calculateCouponDescount()
 
                         toastr.success(data.message)
                     }else if (data.status === 'error'){
@@ -222,7 +220,7 @@
             })
         })
 
-        // decrement product quantity
+        // Decrement Product Quantity
         $('.product-decrement').on('click', function(){
             let input = $(this).siblings('.product-qty');
             let quantity = parseInt(input.val()) - 1;
@@ -248,7 +246,7 @@
                         $(productId).text(totalAmount)
 
                         renderCartSubTotal()
-
+                        calculateCouponDescount()
 
                         toastr.success(data.message)
                     }else if (data.status === 'error'){
@@ -262,7 +260,7 @@
 
         })
 
-        // clear cart
+        // Clear Cart
         $('.clear_cart').on('click', function(e){
             e.preventDefault();
             Swal.fire({
@@ -292,7 +290,7 @@
                 })
         })
 
-        // get subtotal of cart and put it on dom
+        // Get Subtotal Of Cart And put It In Html Code
         function renderCartSubTotal(){
             $.ajax({
                 method: 'GET',
@@ -325,7 +323,7 @@
                     }
                     else if (data.status === 'success')
                     {
-                        
+                        calculateCouponDescount()
                         toastr.success(data.message)
                     }
                 },
@@ -336,27 +334,23 @@
                 }
             })
         })
-        // $('#coupon_form').on('submit', function(e){
-        //     e.preventDefault();
-        //     let formData = $(this).serialize();
-        //     $.ajax({
-        //         method: 'GET',
-        //         url: "{{ route('apply-coupon') }}",
-        //         data: formData,
-        //         success: function(data) {
-        //            if(data.status === 'error'){
-        //             toastr.error(data.message)
-        //            }else if (data.status === 'success'){
-        //             calculateCouponDescount()
-        //             toastr.success(data.message)
-        //            }
-        //         },
-        //         error: function(data) {
-        //             console.log(data);
-        //         }
-        //     })
 
-        // })
+        // Calculate Discount Amount
+        function calculateCouponDescount(){
+            $.ajax({
+                method: 'GET',
+                url: "{{ route('coupon-calculation') }}",
+                success: function(data) {
+                    if(data.status === 'success'){
+                        $('#discount').text('{{$settings->currency_icon}}'+data.discount);
+                        $('#cart_total').text('{{$settings->currency_icon}}'+data.cart_total);
+                    }
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
+        }
 
     })
 </script>

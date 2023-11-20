@@ -53,6 +53,8 @@ Route::get('cart/sidebar-product-total', [CartController::class, 'getCartTotal']
 
 /* Coupon Routes */
 Route::get('apply-coupon', [CartController::class, 'applyCoupon'])->name('apply-coupon');
+Route::get('coupon-calculation', [CartController::class, 'couponCalculation'])->name('coupon-calculation');
+
 
 
 
