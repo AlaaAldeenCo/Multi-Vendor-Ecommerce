@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
+use App\Http\Controllers\Backend\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -69,8 +70,11 @@ Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'
     Route::post('profile', [UserProfileController::class, 'updatePassword'])->name('profile.update.password');
     /* User Address Route */
     Route::resource('address', UserAddressController::class);
-    /* Checkout Route */
+    /* Checkout Routes */
     Route::get('checkout', [CheckOutController::class, 'index'])->name('checkout');
     Route::post('checkout/address-create', [CheckOutController::class, 'createAddress'])->name('checkout.address.create');
+    Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
+    /* Payment Routes */
+    Route::get('payment', [PaymentController::class, 'index'])->name('payment');
 
 });
