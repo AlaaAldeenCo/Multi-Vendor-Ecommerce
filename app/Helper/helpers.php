@@ -73,7 +73,7 @@ function getCartTotal()
 }
 
 
-/** get payable total amount */
+/* Get Payable Total Amount */
 function getMainCartTotal(){
     if(Session::has('coupon'))
     {
@@ -97,7 +97,7 @@ function getMainCartTotal(){
     }
 }
 
-/** get cart discount */
+/* Get Cart Discount */
 function getCartDiscount()
 {
     if(Session::has('coupon'))
@@ -118,4 +118,22 @@ function getCartDiscount()
     {
         return 0;
     }
+}
+
+/* Get Selected Shipping Fee From Session */
+function getShppingFee()
+{
+    if(Session::has('shipping_method'))
+    {
+        return Session::get('shipping_method')['cost'];
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+/* Get Payable Amount */
+function getFinalPayableAmount(){
+    return  getMainCartTotal() + getShppingFee();
 }

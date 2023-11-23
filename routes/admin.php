@@ -17,6 +17,8 @@ use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingRuleController;
+use App\Http\Controllers\Backend\PaymentSettingController;
+use App\Http\Controllers\Backend\PaypalSettingController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -84,4 +86,8 @@ Route::resource('shipping-rule', ShippingRuleController::class);
 /* General Setting Route */
 Route::get('settings',[SettingController::class,'index'])->name('settings.index');
 Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+/* Payment Routes */
+Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+Route::resource('paypal-setting', PaypalSettingController::class);
+
 

@@ -12,7 +12,7 @@ use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
-use App\Http\Controllers\Backend\PaymentController;
+use App\Http\Controllers\Frontend\PaymentController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -76,5 +76,9 @@ Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'
     Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
     /* Payment Routes */
     Route::get('payment', [PaymentController::class, 'index'])->name('payment');
+    /** Paypal routes */
+    Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
+    Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
+    Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
 
 });
