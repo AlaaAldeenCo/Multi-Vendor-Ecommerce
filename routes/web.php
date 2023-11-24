@@ -76,9 +76,13 @@ Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'
     Route::post('checkout/form-submit', [CheckOutController::class, 'checkOutFormSubmit'])->name('checkout.form-submit');
     /* Payment Routes */
     Route::get('payment', [PaymentController::class, 'index'])->name('payment');
-    /** Paypal routes */
+    Route::get('payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+    /* Paypal Routes */
     Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
     Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
     Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
+
+    /* Razorpay Route */
+    Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorPay'])->name('razorpay.payment');
 
 });
