@@ -112,7 +112,7 @@
             {{-- </li> --}}
             {{-- @if (Cart::content()->count() === 0)
                 <li class="text-center">Cart Is Empty!</li>
-            @endif --}} 
+            @endif --}}
         </ul>
         <div class="mini_cart_actions {{Cart::content()->count() === 0 ? 'd-none' : ''}}">
 
