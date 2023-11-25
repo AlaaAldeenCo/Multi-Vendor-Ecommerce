@@ -21,6 +21,7 @@ use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
 use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\TransactionController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -103,5 +104,7 @@ Route::get('out-for-delivery-orders', [OrderController::class, 'outForDeliveryOr
 Route::get('delivered-orders', [OrderController::class, 'deliveredOrders'])->name('delivered-orders');
 Route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name('canceled-orders');
 Route::resource('order', OrderController::class);
+/* Transaction Route */
+Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
 
 
