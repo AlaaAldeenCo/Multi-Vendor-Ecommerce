@@ -5,6 +5,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\OrderDataTable;
 use App\Models\Order;
+use App\DataTables\PendingOrderDataTable;
+use App\DataTables\processedOrderDataTable;
+use App\DataTables\droppedOffOrderDataTable;
+use App\DataTables\shippedOrderDataTable;
+use App\DataTables\outForDeliveryOrderDataTable;
+use App\DataTables\deliveredOrderDataTable;
+use App\DataTables\canceledOrderDataTable;
 class OrderController extends Controller
 {
     /**
@@ -13,6 +20,48 @@ class OrderController extends Controller
     public function index(OrderDataTable $dataTable)
     {
         return $dataTable->render('admin.order.index');
+    }
+
+    /* Show Pending Orders */
+    public function pendingOrders(PendingOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.pending-order');
+    }
+
+    /* Show Processed Orders */
+    public function processedOrders(processedOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.processed-order');
+    }
+
+    /* Show Droped Of Orders */
+    public function droppedOfOrders(droppedOffOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.dropped-off-order');
+    }
+
+    /* Show Shipped Orders */
+    public function shippedOrders(shippedOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.shipped-order');
+    }
+
+    /* Show Out For Delivery Orders */
+    public function outForDeliveryOrders(outForDeliveryOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.out-for-delivery-order');
+    }
+
+    /* Show Delivered Orders */
+    public function deliveredOrders(deliveredOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.delivered-order');
+    }
+
+    /* Show Canceled Orders */
+    public function canceledOrders(canceledOrderDataTable $dataTable)
+    {
+        return $dataTable->render('admin.order.canceled-order');
     }
 
     /**
