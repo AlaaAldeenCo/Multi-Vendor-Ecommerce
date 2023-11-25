@@ -72,4 +72,12 @@ class OrderController extends Controller
         $order->save();
         return response(['status' => 'success', 'message' => 'Updated Order Status']);
     }
+    public function changePaymentStatus(Request $request)
+    {
+        $order = Order::findOrFail($request->id);
+        $order->payment_status = $request->status;
+        $order->save();
+        return response(['status' => 'success', 'message' => 'Updated Payment Status']);
+    }
+
 }

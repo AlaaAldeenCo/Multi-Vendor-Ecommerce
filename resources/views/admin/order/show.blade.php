@@ -374,6 +374,34 @@
 
                 })
             })
+
+            $('#payment_status').on('change', function(){
+                let status = $(this).val();
+                let id = $(this).data('id');
+                $.ajax({
+                    method: 'GET',
+                    url: '{{route("admin.payment.status")}}',
+                    data:
+                    {
+                        status: status,
+                        id: id
+                    },
+
+                    success: function(data)
+                    {
+                        if(data.status === 'success')
+                        {
+                            toastr.success(data.message);
+                        }
+                    },
+
+                    error: function(data)
+                    {
+                        console.log(data);
+                    }
+
+                })
+            })
         })
 
     </script>

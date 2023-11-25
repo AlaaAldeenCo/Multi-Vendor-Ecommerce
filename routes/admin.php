@@ -93,6 +93,7 @@ Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name
 Route::resource('paypal-setting', PaypalSettingController::class);
 Route::put('razorpay-setting/{id}', [RazorpaySettingController::class, 'update'])->name('razorpay-setting.update');
 /* Order Routes */
+Route::get('payment-status', [OrderController::class, 'changePaymentStatus'])->name('payment.status');
 Route::get('order-status', [OrderController::class, 'changeOrderStatus'])->name('order.status');
 Route::resource('order', OrderController::class);
 
