@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\OrderDataTable;
+use App\Models\Order;
 class OrderController extends Controller
 {
     /**
@@ -35,7 +36,9 @@ class OrderController extends Controller
      */
     public function show(string $id)
     {
-        //
+
+        $order = Order::findOrFail($id);
+        return view('admin.order.show', compact('order'));
     }
 
     /**
