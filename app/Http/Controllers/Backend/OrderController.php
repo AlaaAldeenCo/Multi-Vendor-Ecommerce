@@ -65,22 +65,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      */
     public function show(string $id)
@@ -111,7 +95,16 @@ class OrderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $order = Order::findOrFail($id);
+
+        // delete order products
+        $order->orderProducts()->delete();
+        // delete transaction
+        $order->transaction()->delete();
+
+        $order->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted successfully!']);
     }
 
     public function changeOrderStatus(Request $request)
