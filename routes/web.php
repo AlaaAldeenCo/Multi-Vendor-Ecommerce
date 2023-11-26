@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\UserOrderController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,5 +85,8 @@ Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'
 
     /* Razorpay Route */
     Route::post('razorpay/payment', [PaymentController::class, 'payWithRazorPay'])->name('razorpay.payment');
+    /* Order Routes */
+    Route::get('orders', [UserOrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/show/{id}', [UserOrderController::class, 'show'])->name('orders.show');
 
 });

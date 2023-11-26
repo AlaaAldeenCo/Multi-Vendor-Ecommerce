@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\VendorProductImageGalleryController;
 use App\Http\Controllers\Backend\VendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductVariantItemController;
+use App\Http\Controllers\Backend\VendorOrderController;
 
 /* Vendor Route  */
 Route::get('dashboard',[VendorController::class,'dashboard'])->name('dashboard');
@@ -40,3 +41,8 @@ Route::get('products-variant-item-edit/{variantItemId}',[VendorProductVariantIte
 Route::put('products-variant-item-update/{variantItemId}',[VendorProductVariantItemController::class, 'update'])->name('products-variant-item.update');
 Route::delete('products-variant-item/{variantItemId}',[VendorProductVariantItemController::class, 'destroy'])->name('products-variant-item.destroy');
 Route::put('products-variant-item-status', [VendorProductVariantItemController::class, 'chageStatus'])->name('products-variant-item.chages-status');
+
+/* Order Routes */
+Route::get('orders', [VendorOrderController::class, 'index'])->name('orders.index');
+Route::get('orders/show/{id}',[VendorOrderController::class, 'show'])->name('orders.show');
+Route::get('orders/status/{id}', [VendorOrderController::class, 'orderStatus'])->name('orders.status');
