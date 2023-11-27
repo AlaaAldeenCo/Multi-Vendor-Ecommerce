@@ -22,7 +22,7 @@ use App\Http\Controllers\Backend\PaypalSettingController;
 use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\TransactionController;
-
+use App\Http\Controllers\Backend\HomePageSettingController;
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -106,5 +106,7 @@ Route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name(
 Route::resource('order', OrderController::class);
 /* Transaction Route */
 Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
-
+/* Home Page Settings */
+Route::get('home-page-setting',[HomePageSettingController::class, 'index'])->name('home.page.setting');
+Route::put('popular-category-section', [HomePageSettingController::class, 'updatePopularCategorySection'])->name('popular-category-section');
 
