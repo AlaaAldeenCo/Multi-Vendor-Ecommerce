@@ -242,18 +242,18 @@
                                 <div class="wsus__product_topbar_left">
                                     <div class="nav nav-pills" id="v-pills-tab" role="tablist"
                                         aria-orientation="vertical">
-                                        <button class="nav-link active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                        <button class="nav-link {{session()->has('product_list_style') && session()->get('product_list_style') == 'grid' ? 'active' : ''}} {{!session()->has('product_list_style') ? 'active' : ''}} list-view" data-id="grid" id="v-pills-home-tab" data-bs-toggle="pill"
                                             data-bs-target="#v-pills-home" type="button" role="tab"
                                             aria-controls="v-pills-home" aria-selected="true">
                                             <i class="fas fa-th"></i>
                                         </button>
-                                        <button class="nav-link" id="v-pills-profile-tab" data-bs-toggle="pill"
+                                        <button class="nav-link {{session()->has('product_list_style') && session()->get('product_list_style') == 'list' ? 'active' : ''}} list-view"  data-id="list" id="v-pills-profile-tab" data-bs-toggle="pill"
                                             data-bs-target="#v-pills-profile" type="button" role="tab"
                                             aria-controls="v-pills-profile" aria-selected="false">
                                             <i class="fas fa-list-ul"></i>
                                         </button>
                                     </div>
-                                    <div class="wsus__topbar_select">
+                                    {{-- <div class="wsus__topbar_select">
                                         <select class="select_2" name="state">
                                             <option>default shorting</option>
                                             <option>short by rating</option>
@@ -261,20 +261,20 @@
                                             <option>low to high </option>
                                             <option>high to low</option>
                                         </select>
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <div class="wsus__topbar_select">
+                                {{-- <div class="wsus__topbar_select">
                                     <select class="select_2" name="state">
                                         <option>show 12</option>
                                         <option>show 15</option>
                                         <option>show 18</option>
                                         <option>show 21</option>
                                     </select>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="tab-content" id="v-pills-tabContent">
-                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
+                            <div class="tab-pane fade {{session()->has('product_list_style') && session()->get('product_list_style') == 'grid' ? 'show active' : ''}} {{!session()->has('product_list_style') ? 'active' : ''}}" id="v-pills-home" role="tabpanel"
                                 aria-labelledby="v-pills-home-tab">
                                 <div class="row">
                                     @foreach ($products as $product)
@@ -347,7 +347,7 @@
 
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
+                            <div class="tab-pane fade {{session()->has('product_list_style') && session()->get('product_list_style') == 'list' ? 'show active' : ''}}" id="v-pills-profile" role="tabpanel"
                                 aria-labelledby="v-pills-profile-tab">
                                 <div class="row">
                                     @foreach ($products as $product)
@@ -419,28 +419,20 @@
                             </div>
                         </div>
                     </div>
+                    @if (count($products) === 0)
+                    <div class="text-center mt-5">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2>Product not found!</h2>
+                            </div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
-                <div class="col-xl-12">
-                    <section id="pagination">
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <i class="fas fa-chevron-left"></i>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link page_active" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </section>
+                <div class="col-xl-12" style="display:flex; justify-content:center">
+                    @if ($products->hasPages())
+                        {{$products->withQueryString()->links()}}
+                    @endif
                 </div>
             </div>
         </div>
@@ -449,9 +441,27 @@
         PRODUCT PAGE END
     ==============================-->
 
-
-
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+            $('.list-view').on('click', function(){
+                let style = $(this).data('id');
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{route('change-product-list-view')}}",
+                    data: {style: style},
+                    success: function(data){
+
+                    }
+                })
+            })
+        });
+
+    </script>
+@endpush
 
 
 

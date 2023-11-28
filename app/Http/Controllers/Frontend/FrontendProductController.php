@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ChildCategory;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\SubCategory;
+use Illuminate\Support\Facades\Session;
 
 class FrontendProductController extends Controller
 {
@@ -23,8 +26,31 @@ class FrontendProductController extends Controller
                 'category_id' => $category->id,
                 'status' => 1,
                 'is_approved' => 1
-            ])->paginate(12);
+            ])->paginate(1);
+        }
+        elseif($request->has('subcategory'))
+        {
+            $category = SubCategory::where('slug', $request->subcategory)->first();
+            $products = Product::where([
+                'sub_category_id'=> $category->id,
+                'status' => 1,
+                'is_approved' => 1
+            ])->paginate(1);
+        }
+        elseif($request->has('childcategory'))
+        {
+            $category = ChildCategory::where('slug', $request->childcategory)->first();
+            $products = Product::where([
+                'child_category_id'=> $category->id,
+                'status' => 1,
+                'is_approved' => 1
+            ])->paginate(1);
         }
         return view('frontend.pages.product', compact('products'));
+    }
+
+    public function chageListView(Request $request)
+    {
+       Session::put('product_list_style', $request->style);
     }
 }
