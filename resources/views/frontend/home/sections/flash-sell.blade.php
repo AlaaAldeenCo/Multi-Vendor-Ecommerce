@@ -140,27 +140,6 @@
                                                 </div>
 
                                             @endforeach
-
-
-
-
-
-
-                                            {{-- <div class="col-xl-12">
-                                                <div class="modal_slider_img">
-                                                    <img src="images/zoom2.jpg" alt="product" class="img-fluid w-100">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12">
-                                                <div class="modal_slider_img">
-                                                    <img src="images/zoom3.jpg" alt="product" class="img-fluid w-100">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-12">
-                                                <div class="modal_slider_img">
-                                                    <img src="images/zoom4.jpg" alt="product" class="img-fluid w-100">
-                                                </div>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>

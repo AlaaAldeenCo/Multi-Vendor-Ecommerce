@@ -197,7 +197,7 @@
     <script>
         $(document).ready(function(){
 
-            /* Get Sub Categories*/
+            /* Get Sub Categories */
             $('body').on('change', '.main-category', function(e){
                 let id = $(this).val();
                 let row = $(this).closest('.row');
@@ -209,7 +209,9 @@
                     },
                     success: function(data){
                         let selector = row.find('.sub-category');
+                        let selector2 = row.find('.child-category');
                         selector.html('<option value="">Select</option>')
+                        selector2.html('<option value="">Select</option>')
 
                         $.each(data, function(i, item){
                             selector.append(`<option value="${item.id}">${item.name}</option>`)
@@ -221,7 +223,7 @@
                 })
             })
 
-            /* Get Child Categories*/
+            /* Get Child Categories */
             $('body').on('change', '.sub-category', function(e){
                 let id = $(this).val();
                 let row = $(this).closest('.row');
