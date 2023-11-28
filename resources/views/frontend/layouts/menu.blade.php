@@ -20,7 +20,7 @@
                     <ul class="wsus_menu_cat_item show_home toggle_menu">
                         {{-- <li><a href="#"><i class="fas fa-star"></i> hot promotions</a></li> --}}
                         @foreach ($categories as $category)
-                            <li><a class="{{count($category->subCategories)>0? 'wsus__droap_arrow':''}}" href="#"><i class="{{$category->icon}}"></i>{{$category->name}}</a>
+                            <li><a class="{{count($category->subCategories)>0? 'wsus__droap_arrow':''}}" href="{{route('products.index', ['category' => $category->slug])}}"><i class="{{$category->icon}}"></i>{{$category->name}}</a>
                                 @if (count($category->subCategories)>0)
                                 <ul class="wsus_menu_cat_droapdown">
                                     @foreach ($category->subCategories as $subCategory)
@@ -177,7 +177,7 @@
 
                             @foreach ($categories as $categoryItem)
 
-                            <li><a href="#" class="{{count($categoryItem->subCategories) >0 ? 'accordion-button':''}} collapsed" data-bs-toggle="collapse"
+                            <li><a href="{{route('products.index')}}" class="{{count($categoryItem->subCategories) >0 ? 'accordion-button':''}} collapsed" data-bs-toggle="collapse"
                                 data-bs-target="#flush-collapseThreew-{{$loop->index}}" aria-expanded="false"
                                 aria-controls="flush-collapseThreew-{{$loop->index}}"><i class="{{$categoryItem->icon}}"></i>{{$categoryItem->name}}</a>
                                 @if (count($categoryItem->subCategories)>0)
