@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use Illuminate\Http\Request;
@@ -19,34 +20,77 @@ class FrontendProductController extends Controller
 
     public function productsIndex(Request $request)
     {
+        // dd($request->all());
+        // dd(explode(';', $request->range));
         if($request->has('category'))
         {
-            $category = Category::where('slug', $request->category)->first();
+            $category = Category::where('slug', $request->category)->firstOrFail();
             $products = Product::where([
                 'category_id' => $category->id,
                 'status' => 1,
                 'is_approved' => 1
-            ])->paginate(1);
+            ])->when($request->has('range'), function($query) use ($request){
+                $price = explode(';', $request->range);
+                $from = $price[0];
+                $to = $price[1];
+               return $query->where('price', '>=', $from)->where('price', '<=', $to);
+            })
+            ->paginate(12);
         }
+
         elseif($request->has('subcategory'))
         {
-            $category = SubCategory::where('slug', $request->subcategory)->first();
+            $category = SubCategory::where('slug', $request->subcategory)->firstOrFail();
             $products = Product::where([
                 'sub_category_id'=> $category->id,
                 'status' => 1,
                 'is_approved' => 1
-            ])->paginate(1);
+            ])->when($request->has('range'), function($query) use ($request){
+                $price = explode(';', $request->range);
+                $from = $price[0];
+                $to = $price[1];
+               return $query->where('price', '>=', $from)->where('price', '<=', $to);
+            })
+            ->paginate(12);
         }
+
+
         elseif($request->has('childcategory'))
         {
-            $category = ChildCategory::where('slug', $request->childcategory)->first();
+            $category = ChildCategory::where('slug', $request->childcategory)->firstOrFail();
             $products = Product::where([
                 'child_category_id'=> $category->id,
                 'status' => 1,
                 'is_approved' => 1
-            ])->paginate(1);
+            ])->when($request->has('range'), function($query) use ($request){
+                $price = explode(';', $request->range);
+                $from = $price[0];
+                $to = $price[1];
+               return $query->where('price', '>=', $from)->where('price', '<=', $to);
+            })
+            ->paginate(12);
         }
-        return view('frontend.pages.product', compact('products'));
+        elseif($request->has('brand'))
+        {
+            $brand = Brand::where('slug', $request->brand)->firstOrFail();
+
+             $products = Product::where([
+                 'brand_id' => $brand->id,
+                 'status' => 1,
+                 'is_approved' => 1
+             ])
+             ->when($request->has('range'), function($query) use ($request){
+                 $price = explode(';', $request->range);
+                 $from = $price[0];
+                 $to = $price[1];
+
+                 return $query->where('price', '>=', $from)->where('price', '<=', $to);
+             })
+             ->paginate(12);
+         }
+        $categories = Category::where(['status' => 1])->get();
+        $brands = Brand::where(['status' => 1])->get();
+        return view('frontend.pages.product', compact('products', 'categories', 'brands'));
     }
 
     public function chageListView(Request $request)
