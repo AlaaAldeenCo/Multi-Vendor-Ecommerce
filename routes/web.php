@@ -14,6 +14,8 @@ use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\UserOrderController;
+use App\Http\Controllers\Frontend\WishlistController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -91,5 +93,9 @@ Route::group(['middleware'=>['auth', 'verified'], 'prefix'=>'user','as'=>'user.'
     /* Order Routes */
     Route::get('orders', [UserOrderController::class, 'index'])->name('orders.index');
     Route::get('orders/show/{id}', [UserOrderController::class, 'show'])->name('orders.show');
+
+    /* Wishlist Routes */
+    Route::get('wishlist', [WishlistController::class, 'index' ])->name('wishlist.index');
+    Route::get('wishlist/add-product', [WishlistController::class, 'addToWishlist'])->name('wishlist.store');
 
 });

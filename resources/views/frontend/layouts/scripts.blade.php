@@ -128,6 +128,33 @@
             })
         }
 
+        /* Add To Wishlist */
+        $('.add_to_wishlist').on('click', function(e)
+        {
+            e.preventDefault();
+            let id = $(this).data('id');
+            $.ajax({
+                method: 'Get',
+                url: '{{route("user.wishlist.store")}}',
+                data: { id : id },
+                success: function(data)
+                {
+                    if(data.status === 'success')
+                    {
+                        toastr.success(data.message);
+                    }
+                    elseif(data.status === 'error')
+                    {
+                        toastr.error(data.message);
+                    }
+                },
+                error: function(data)
+                {
+                    console.log(data)
+                }
+            })
+        })
+
     })
 
 
