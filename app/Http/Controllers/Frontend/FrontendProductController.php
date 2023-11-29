@@ -88,6 +88,22 @@ class FrontendProductController extends Controller
              })
              ->paginate(12);
          }
+        elseif($request->has('search'))
+        {
+            $products = Product::where(['status' => 1, 'is_approved' => 1])->where(function($query) use ($request){
+                $query->where('name', 'like', '%'.$request->search.'%')
+                ->orWhere('long_description', 'like', '%'.$request->search.'%')
+                ->orWhereHas('category', function($query) use ($request){
+                    $query->where('name', 'like', '%'.$request->search.'%')
+                    ->orWhere('long_description', 'like', '%'.$request->search.'%');
+                });
+            })
+            ->paginate(12);
+        }
+        else
+        {
+            $products = Product::where(['status' => 1, 'is_approved' => 1])->orderBy('id' , 'DESC')->paginate(12);
+        }
         $categories = Category::where(['status' => 1])->get();
         $brands = Brand::where(['status' => 1])->get();
         return view('frontend.pages.product', compact('products', 'categories', 'brands'));
