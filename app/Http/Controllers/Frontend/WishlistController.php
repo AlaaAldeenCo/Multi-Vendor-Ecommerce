@@ -11,7 +11,7 @@ class WishlistController extends Controller
 {
     public function index()
     {
-        $wishlistProducts = Wishlist::with('product')->where('user_id', Auth::user()->id)->get();
+        $wishlistProducts = Wishlist::with('product')->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')->get();
         return view('frontend.pages.wishlist', compact('wishlistProducts'));
     }
 
@@ -30,7 +30,8 @@ class WishlistController extends Controller
         $wishlist->product_id = $request->id;
         $wishlist->user_id = Auth::user()->id;
         $wishlist->save();
-        return response(['status' => 'success', 'message' => 'Product added into the wishlist!']);
+        $count = Wishlist::where('user_id', Auth::user()->id)->count();
+        return response(['status' => 'success', 'message' => 'Product added into the wishlist!', 'count' => $count]);
     }
 
     public function destory(string $id)

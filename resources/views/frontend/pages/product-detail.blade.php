@@ -9,7 +9,7 @@
     <!--==========================
       PRODUCT MODAL VIEW START
     ===========================-->
-    <section class="product_popup_modal">
+    {{-- <section class="product_popup_modal">
         <div class="modal fade" id="exampleModal2" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--==========================
       PRODUCT MODAL VIEW END
     ===========================-->
@@ -278,8 +278,8 @@
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
                                     <li><a class="buy_now" href="#">buy now</a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-random"></i></a></li>
+                                    <li><a href="" class="add_to_wishlist" data-id="{{$product->id}}"><i class="fal fa-heart"></i></a></li>
+                                    {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                 </ul>
 
                             </form>

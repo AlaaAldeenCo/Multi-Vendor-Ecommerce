@@ -141,9 +141,10 @@
                 {
                     if(data.status === 'success')
                     {
+                        $('#wishlist_count').text(data.count)
                         toastr.success(data.message);
                     }
-                    elseif(data.status === 'error')
+                    else if(data.status === 'error')
                     {
                         toastr.error(data.message);
                     }
