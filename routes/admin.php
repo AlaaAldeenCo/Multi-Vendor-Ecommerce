@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\ShippingRuleController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\PaypalSettingController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Backend\RazorpaySettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\HomePageSettingController;
+
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
@@ -112,5 +114,7 @@ Route::put('popular-category-section', [HomePageSettingController::class, 'updat
 Route::put('product-slider-section-one', [HomePageSettingController::class, 'updateProductSliderSectionOne'])->name('product-slider-section-one');
 Route::put('product-slider-section-two', [HomePageSettingController::class, 'updateProductSliderSectionTwo'])->name('product-slider-section-two');
 Route::put('product-slider-section-three', [HomePageSettingController::class, 'updateProductSliderSectionThree'])->name('product-slider-section-three');
+/* Footer Route */
+Route::resource('footer-info', FooterInfoController::class);
 
 

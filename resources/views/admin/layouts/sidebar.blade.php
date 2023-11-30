@@ -83,14 +83,26 @@
             </ul>
         </li>
 
-        <li class="dropdown {{setActive(['admin.slider.*'])}}">
-          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
+
+
+        <li class="dropdown {{setActive(['admin.footer-info.*'])}}">
+          <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Footer</span></a>
           <ul class="dropdown-menu">
-            <li class="{{setActive(['admin.slider.*'])}}"><a class="nav-link" href="{{route('admin.slider.index')}}">Slider</a></li>
+            <li class="{{setActive(['admin.footer-info.*'])}}"><a class="nav-link" href="{{route('admin.footer-info.index')}}">Footer Info</a></li>
             <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link" href="{{route('admin.home.page.setting')}}">Home Page Setting</a></li>
 
           </ul>
         </li>
+
+        <li class="dropdown {{setActive(['admin.slider.*'])}}">
+            <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
+            <ul class="dropdown-menu">
+              <li class="{{setActive(['admin.slider.*'])}}"><a class="nav-link" href="{{route('admin.slider.index')}}">Slider</a></li>
+              <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link" href="{{route('admin.home.page.setting')}}">Home Page Setting</a></li>
+
+            </ul>
+          </li>
+
         <li><a class="nav-link" href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
         {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
