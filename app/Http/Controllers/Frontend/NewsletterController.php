@@ -20,7 +20,11 @@ class NewsletterController extends Controller
         {
             if($existSubscriber->is_verified == 0)
             {
-
+                $existSubscriber->verified_token =\Str::random(20);
+                $existSubscriber->save();
+                MailHelper::setMailConfig();
+                Mail::to($existSubscriber->email)->send(new SubscriptionVrefication($existSubscriber));
+                return response(['status' => 'success', 'message' => 'A verification link has been sent to your email please check']);
             }
             elseif($existSubscriber->is_verified == 1)
             {
@@ -43,6 +47,20 @@ class NewsletterController extends Controller
 
     public function newsLetterEmailVarify($token)
     {
-        dd($token);
+        $verify = NewsletterSubscriber::where('verified_token', $token)->first();
+        if($verify)
+        {
+            $verify->verified_token = 'verified';
+            $verify->is_verified = 1;
+            $verify->save();
+            toastr('Email verification successfully', 'success', 'success');
+            return redirect()->route('home');
+        }
+        else
+        {
+            toastr('Invalid token', 'error', 'Error');
+            return redirect()->route('home');
+        }
+
     }
 }

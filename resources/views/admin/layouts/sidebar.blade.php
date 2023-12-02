@@ -102,9 +102,9 @@
               <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link" href="{{route('admin.home.page.setting')}}">Home Page Setting</a></li>
 
             </ul>
-          </li>
-
-        <li><a class="nav-link" href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
+        </li>
+        <li><a class="nav-link {{ setActive(['admin.subscribers.*']) }}" href="{{route('admin.subscribers.index')}}"><i class="fas fa-user"></i> <span>Subscribers</span></a></li>
+        <li><a class="nav-link {{setActive(['admin.settings.*'])}}" href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
         {{-- <li class="dropdown">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Layout</span></a>
             <ul class="dropdown-menu">
