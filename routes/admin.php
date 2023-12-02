@@ -16,6 +16,7 @@ use App\Http\Controllers\Backend\SellerProductController;
 use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterInfoController;
 use App\Http\Controllers\Backend\FooterSocialController;
@@ -94,6 +95,7 @@ Route::resource('shipping-rule', ShippingRuleController::class);
 /* General Setting Route */
 Route::get('settings',[SettingController::class,'index'])->name('settings.index');
 Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
+Route::put('email-setting-update', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
 /* Payment Routes */
 Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
 Route::resource('paypal-setting', PaypalSettingController::class);
@@ -126,6 +128,9 @@ Route::put('footer-grid-two/change-status', [FooterGridTwoController::class, 'ch
 Route::put('footer-grid-two/change-title', [FooterGridTwoController::class, 'changeTitle'])->name('footer-grid-two.change-title');
 Route::resource('footer-grid-two', FooterGridTwoController::class);
 
+Route::put('footer-grid-three/change-status', [FooterGridThreeController::class, 'changeStatus'])->name('footer-grid-three.change-status');
+Route::put('footer-grid-three/change-title', [FooterGridThreeController::class, 'changeTitle'])->name('footer-grid-three.change-title');
+Route::resource('footer-grid-three', FooterGridThreeController::class);
 
 
 

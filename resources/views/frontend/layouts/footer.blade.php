@@ -3,6 +3,7 @@
     $footerSocials = \App\Models\FooterSocial::where('status', 1)->get();
     $footerGridTwoLinks = \App\Models\FooterGridTwo::where('status', 1)->get();
     $footerTitle = \App\Models\FooterTitle::first();
+    $footerGridThreeLinks = \App\Models\FooterGridThree::where('status', 1)->get();
 @endphp
 <footer class="footer_2">
     <div class="container">
@@ -40,15 +41,11 @@
             </div>
             <div class="col-xl-2 col-sm-5 col-md-4 col-lg-2">
                 <div class="wsus__footer_content">
-                    <h5>Company</h5>
+                    <h5>{{$footerTitle->footer_grid_three_title}}</h5>
                     <ul class="wsus__footer_menu">
-                        <li><a href="#"><i class="fas fa-caret-right"></i> About Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Career</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Contact Us</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Affilate</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Order History</a></li>
-                        <li><a href="#"><i class="fas fa-caret-right"></i> Team Member</a></li>
+                        @foreach ($footerGridThreeLinks as $link)
+                        <li><a href="{{$link->url}}"><i class="fas fa-caret-right"></i> {{$link->name}}</a></li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
@@ -57,13 +54,14 @@
                     <h3>Subscribe To Our Newsletter</h3>
                     <p>Get all the latest information on Events, Sales and Offers.
                         Get all the latest information on Events.</p>
-                    <form>
-                        <input type="text" placeholder="Search...">
+                    <form action="" method="POST" id="newsletter">
+                        @csrf
+                        <input type="text" placeholder="Email" name="email">
                         <button type="submit" class="common_btn">subscribe</button>
                     </form>
                     <div class="footer_payment">
                         <p>We're using safe payment for :</p>
-                        <img src="images/credit2.png" alt="card" class="img-fluid">
+                        <img src="{{asset('frontend/images/credit2.png')}}" alt="card" class="img-fluid">
                     </div>
                 </div>
             </div>
