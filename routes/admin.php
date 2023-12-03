@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ChildCategoryController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
+use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
 use App\Http\Controllers\Backend\ProductVariantController;
@@ -135,4 +136,7 @@ Route::resource('footer-grid-three', FooterGridThreeController::class);
 Route::get('subscribers', [SubscribersController::class, 'index'])->name('subscribers.index');
 Route::delete('subscribers/{id}', [SubscribersController::class, 'destory'])->name('subscribers.destory');
 Route::post('subscribers-send-mail',[SubscribersController::class, 'sendMail'])->name('subscribers-send-mail');
+/* Advertisement Routes */
+Route::get('advertisement', [AdvertisementController::class, 'index'])->name('advertisement.index');
+Route::put('advertisement/homepage-banner-secion-one', [AdvertisementController::class, 'homepageBannerSecionOne'])->name('homepage-banner-secion-one');
 

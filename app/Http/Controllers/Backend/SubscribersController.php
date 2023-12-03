@@ -35,7 +35,4 @@ class SubscribersController extends Controller
        return response(['status' => 'success', 'message' => 'deleted successfully']);
     }
 
-//     Hello !
-// How are you?
-// What are you doing now
 }

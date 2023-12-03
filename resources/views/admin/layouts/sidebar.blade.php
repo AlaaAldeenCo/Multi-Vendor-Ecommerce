@@ -103,6 +103,7 @@
 
             </ul>
         </li>
+        <li><a class="nav-link {{ setActive(['admin.advertisement.*']) }}" href="{{route('admin.advertisement.index')}}"><i class="fas fa-ad"></i><span>Advertisement</span></a></li>
         <li><a class="nav-link {{ setActive(['admin.subscribers.*']) }}" href="{{route('admin.subscribers.index')}}"><i class="fas fa-user"></i> <span>Subscribers</span></a></li>
         <li><a class="nav-link {{setActive(['admin.settings.*'])}}" href="{{route('admin.settings.index')}}"><i class="far fa-square"></i> <span>Settings</span></a></li>
         {{-- <li class="dropdown">
