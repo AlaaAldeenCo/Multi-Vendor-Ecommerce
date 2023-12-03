@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Adverisement;
 use Illuminate\Http\Request;
 use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
@@ -21,9 +22,24 @@ class HomeController extends Controller
         $categoryProductSliderSectionTwo = HomePageSetting::where('key', 'product_slider_section_two')->first();
         $categoryProductSliderSectionThree = HomePageSetting::where('key', 'product_slider_section_three')->first();
 
+        $homepage_secion_banner_one = Adverisement::where('key', 'homepage_secion_banner_one')->first();
+        $homepage_secion_banner_one = json_decode($homepage_secion_banner_one->value);
+
+        $homepage_secion_banner_two = Adverisement::where('key', 'homepage_secion_banner_two')->first();
+        $homepage_secion_banner_two = json_decode($homepage_secion_banner_two?->value);
+
+        $homepage_secion_banner_three = Adverisement::where('key', 'homepage_secion_banner_three')->first();
+        $homepage_secion_banner_three = json_decode($homepage_secion_banner_three?->value);
+
+        $homepage_secion_banner_four = Adverisement::where('key', 'homepage_secion_banner_four')->first();
+        $homepage_secion_banner_four = json_decode($homepage_secion_banner_four?->value);
+
 
         return view('frontend.home.home', compact ('flashSaleDate','flashSaleItems', 'popularCategory', 'brands',
-        'typeBaseProducts','categoryProductSliderSectionOne', 'categoryProductSliderSectionTwo', 'categoryProductSliderSectionThree'
+        'typeBaseProducts','categoryProductSliderSectionOne', 'categoryProductSliderSectionTwo',
+        'categoryProductSliderSectionThree', 'homepage_secion_banner_one',
+        'homepage_secion_banner_two', 'homepage_secion_banner_three',
+        'homepage_secion_banner_four'
 
     ));
     }

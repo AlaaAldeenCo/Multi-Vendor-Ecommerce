@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Adverisement;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use Cart;
@@ -22,7 +23,10 @@ class CartController extends Controller
             return redirect()->route('home');
         }
 
-        return view('frontend.pages.cart-detail', compact('cartItems'));
+        $cartpage_banner_section = Adverisement::where('key', 'cartpage_banner_section')->first();
+        $cartpage_banner_section = json_decode($cartpage_banner_section?->value);
+
+        return view('frontend.pages.cart-detail', compact('cartItems', 'cartpage_banner_section'));
     }
 
     /* Add Product to Cart */

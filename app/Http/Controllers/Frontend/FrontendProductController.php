@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
+use App\Models\Adverisement;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
@@ -106,7 +107,9 @@ class FrontendProductController extends Controller
         }
         $categories = Category::where(['status' => 1])->get();
         $brands = Brand::where(['status' => 1])->get();
-        return view('frontend.pages.product', compact('products', 'categories', 'brands'));
+        $productpage_banner_section = Adverisement::where('key', 'productpage_banner_section')->first();
+        $productpage_banner_section = json_decode($productpage_banner_section?->value);
+        return view('frontend.pages.product', compact('products', 'categories', 'brands', 'productpage_banner_section'));
     }
 
     public function chageListView(Request $request)
