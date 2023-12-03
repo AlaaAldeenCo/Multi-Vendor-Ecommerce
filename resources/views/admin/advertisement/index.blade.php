@@ -30,9 +30,9 @@
 
                             @include('admin.advertisement.homepage-banner-one')
 
-                            {{-- @include('admin.advertisement.homepage-banner-two')
+                            @include('admin.advertisement.homepage-banner-two')
 
-                            @include('admin.advertisement.homepage-banner-three')
+                            {{-- @include('admin.advertisement.homepage-banner-three')
 
                             @include('admin.advertisement.homepage-banner-four')
 
