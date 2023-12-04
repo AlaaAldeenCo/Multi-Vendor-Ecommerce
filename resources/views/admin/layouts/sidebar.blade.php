@@ -55,7 +55,8 @@
              'admin.products-variant.*',
              'admin.products-variant-item.*',
              'admin.seller-products.*',
-             'admin.seller-pending-products.*'
+             'admin.seller-pending-products.*',
+             'admin.reviews.*'
              ]) }}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Products</span></a>
             <ul class="dropdown-menu">
@@ -67,6 +68,7 @@
                 'admin.products-variant-item.*'])}}"><a class="nav-link" href="{{route('admin.products.index')}}">Product</a></li>
               <li class="{{setActive(['admin.seller-products.*'])}}"><a class="nav-link" href="{{route('admin.seller-products.index')}}">Seller Products</a></li>
               <li class="{{ setActive(['admin.seller-pending-products.*']) }}"><a class="nav-link" href="{{ route('admin.seller-pending-products.index') }}">Seller Pending Products</a></li>
+              <li class="{{ setActive(['admin.reviews.*']) }}"><a class="nav-link" href="{{ route('admin.reviews.index') }}">Product Reviews</a></li>
 
             </ul>
         </li>
