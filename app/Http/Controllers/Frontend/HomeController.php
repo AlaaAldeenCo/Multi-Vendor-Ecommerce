@@ -8,7 +8,10 @@ use App\Models\FlashSale;
 use App\Models\FlashSaleItem;
 use App\Models\HomePageSetting;
 use App\Models\Brand;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\Vendor;
+
 class HomeController extends Controller
 {
     public function index()
@@ -53,5 +56,20 @@ class HomeController extends Controller
         $typeBaseProducts['best_product'] = Product::where(['product_type' => 'best_product', 'is_approved' => 1, 'status' => 1])->orderBy('id', 'DESC')->take(8)->get();
 
         return $typeBaseProducts;
+    }
+
+    public function vendorPage()
+    {
+        $vendors = Vendor::paginate(10);
+        return view('frontend.pages.vendor', compact('vendors'));
+    }
+
+    public function vendorProductsPage(string $id)
+    {
+        $products = Product::where(['status' => 1, 'is_approved' => 1, 'vendor_id' => $id])->orderBy('id', 'DESC')->paginate(12);
+        $categories = Category::where(['status' => 1])->get();
+        $brands = Brand::where(['status' => 1])->get();
+        $vendor = Vendor::findOrFail($id);
+        return view('frontend.pages.vendor-product', compact('products', 'categories', 'brands', 'vendor'));
     }
 }
