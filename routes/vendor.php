@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\VendorProductImageGalleryController;
 use App\Http\Controllers\Backend\VendorProductVariantController;
 use App\Http\Controllers\Backend\VendorProductVariantItemController;
 use App\Http\Controllers\Backend\VendorOrderController;
+use App\Http\Controllers\Backend\VendorProductReviewController;
 
 /* Vendor Route  */
 Route::get('dashboard',[VendorController::class,'dashboard'])->name('dashboard');
@@ -46,3 +47,6 @@ Route::put('products-variant-item-status', [VendorProductVariantItemController::
 Route::get('orders', [VendorOrderController::class, 'index'])->name('orders.index');
 Route::get('orders/show/{id}',[VendorOrderController::class, 'show'])->name('orders.show');
 Route::get('orders/status/{id}', [VendorOrderController::class, 'orderStatus'])->name('orders.status');
+
+/* Reviews Routes */
+Route::get('reviews', [VendorProductReviewController::class, 'index'])->name('reviews.index');

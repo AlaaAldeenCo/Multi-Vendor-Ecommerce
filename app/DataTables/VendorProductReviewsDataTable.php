@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\UserProductReview;
+use App\Models\VendorProductReview;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -14,7 +14,7 @@ use Yajra\DataTables\Services\DataTable;
 use App\Models\ProductReview;
 use Illuminate\Support\Facades\Auth;
 
-class UserProductReviewsDataTable extends DataTable
+class VendorProductReviewsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -24,28 +24,21 @@ class UserProductReviewsDataTable extends DataTable
     public function dataTable(QueryBuilder $query): EloquentDataTable
     {
         return (new EloquentDataTable($query))
-            ->addColumn('product', function($query)
-            {
-                return "<a href = '".route('product-detail', $query->product->slug)."'>".$query->product->name."</a>";
-            })
-            ->addColumn('user', function($query)
-            {
-                return $query->user->name;
-            })
-            ->addColumn('status', function($query)
-            {
-                if($query->status == 1)
-                {
-                    return "<span class='badge bg-success'>Approved</span>";
-                }
-
-                else
-                {
-                    return "<span class='badge bg-warning'>Pending</span>";
-                }
-            })
-            ->rawColumns(['product', 'status'])
-            ->setRowId('id');
+        ->addColumn('product', function($query){
+            return "<a href='".route('product-detail', $query->product->slug)."' > ".$query->product->name."</a>";
+        })
+        ->addColumn('user', function($query){
+            return $query->user->name;
+        })
+        ->addColumn('status', function($query){
+            if($query->status == 1){
+                return "<span class='badge bg-success'>Approved</span>";
+            }else {
+                return "<span class='badge bg-waring'>Pending</span>";
+            }
+        })
+        ->rawColumns(['product', 'status'])
+        ->setRowId('id');
     }
 
     /**
@@ -53,7 +46,7 @@ class UserProductReviewsDataTable extends DataTable
      */
     public function query(ProductReview $model): QueryBuilder
     {
-        return $model::with('product')->where('user_id', Auth::user()->id)->newQuery();
+        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }
 
     /**
@@ -62,11 +55,11 @@ class UserProductReviewsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('userproductreviews-table')
+                    ->setTableId('vendorproductreviews-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     //->dom('Bfrtip')
-                    ->orderBy(1)
+                    ->orderBy(0)
                     ->selectStyleSingle()
                     ->buttons([
                         Button::make('excel'),
@@ -89,7 +82,7 @@ class UserProductReviewsDataTable extends DataTable
             Column::make('user'),
             Column::make('rating'),
             Column::make('review'),
-            Column::make('status'),
+            Column::make('status')
         ];
     }
 
@@ -98,6 +91,6 @@ class UserProductReviewsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'UserProductReviews_' . date('YmdHis');
+        return 'VendorProductReviews_' . date('YmdHis');
     }
 }
