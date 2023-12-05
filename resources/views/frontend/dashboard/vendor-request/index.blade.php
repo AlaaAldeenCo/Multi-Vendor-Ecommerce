@@ -18,7 +18,7 @@
             <h3><i class="far fa-user"></i> Vendor Request</h3>
             <div class="wsus__dashboard_profile">
                 <div class="wsus__dash_pro_area">
-
+                    {!!@$content->content!!}
                 </div>
               </div>
               <br>

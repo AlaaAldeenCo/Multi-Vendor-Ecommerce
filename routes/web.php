@@ -13,6 +13,7 @@ use App\Http\Controllers\Frontend\UserAddressController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserOrderController;
@@ -72,6 +73,11 @@ Route::get('newsletter-verify/{token}',[NewsletterController::class , 'newsLette
 /* Vendor Page Routes */
 Route::get('vendor', [HomeController::class, 'vendorPage'])->name('vendor.index');
 Route::get('vendor-product/{id}', [HomeController::class, 'vendorProductsPage'])->name('vendor.products');
+
+/* About Page Route */
+Route::get('about', [PageController::class, 'about'])->name('about');
+/* Terms And Conditions Page Route */
+Route::get('terms-and-conditions', [PageController::class, 'termsAndCondition'])->name('terms-and-conditions');
 
 
 
