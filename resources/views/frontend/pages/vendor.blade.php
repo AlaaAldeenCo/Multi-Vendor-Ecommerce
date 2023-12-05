@@ -252,7 +252,7 @@
                 </div>
                 <div class="col-xl-12">
                     <section id="pagination">
-                        <nav aria-label="Page navigation example">
+                        {{-- <nav aria-label="Page navigation example">
                             <ul class="pagination">
                                 <li class="page-item">
                                     <a class="page-link" href="#" aria-label="Previous">
@@ -269,7 +269,11 @@
                                     </a>
                                 </li>
                             </ul>
-                        </nav>
+                        </nav> --}}
+
+                        @if($vendors->hasPages())
+                            {{$vendors->links()}}
+                        @endif
                     </section>
                 </div>
             </div>

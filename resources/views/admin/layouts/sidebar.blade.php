@@ -97,6 +97,17 @@
           </ul>
         </li>
 
+        <li
+                class="dropdown {{ setActive([
+                ]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Users</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setActive(['admin.vendor-requests.index']) }}"><a class="nav-link"
+                            href="{{ route('admin.vendor-requests.index') }}">Pending vendors</a></li>
+                </ul>
+            </li>
+
+
         <li class="dropdown {{setActive(['admin.slider.*'])}}">
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Website</span></a>
             <ul class="dropdown-menu">

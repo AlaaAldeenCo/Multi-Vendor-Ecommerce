@@ -30,6 +30,7 @@ use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\HomePageSettingController;
 use App\Http\Controllers\Backend\SubscribersController;
+use App\Http\Controllers\Backend\VendorRequestController;
 
 /* Admin Route  */
 Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -148,4 +149,9 @@ Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'ca
 /* Reviews Routes */
 Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
 Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
+/* Vendor Request Routes */
+Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
+Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
+Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');
+
 
