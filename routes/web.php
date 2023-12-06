@@ -78,6 +78,9 @@ Route::get('vendor-product/{id}', [HomeController::class, 'vendorProductsPage'])
 Route::get('about', [PageController::class, 'about'])->name('about');
 /* Terms And Conditions Page Route */
 Route::get('terms-and-conditions', [PageController::class, 'termsAndCondition'])->name('terms-and-conditions');
+/* Contact Routes */
+Route::get('contact', [PageController::class, 'contact'])->name('contact');
+Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
 
 
 

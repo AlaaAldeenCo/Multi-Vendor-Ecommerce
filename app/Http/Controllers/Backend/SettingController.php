@@ -35,9 +35,9 @@ class SettingController extends Controller
                 'site_name' => $request->site_name,
                 'layout' => $request->layout,
                 'contact_email' => $request->contact_email,
-                // 'contact_phone' => $request->contact_phone,
-                // 'contact_address' => $request->contact_address,
-                // 'map' => $request->map,
+                'contact_phone' => $request->contact_phone,
+                'contact_address' => $request->contact_address,
+                'map' => $request->map,
                 'currency_name' => $request->currency_name,
                 'currency_icon' => $request->currency_icon,
                 'time_zone' => $request->time_zone
@@ -62,12 +62,15 @@ class SettingController extends Controller
         EmailConfiguration::updateOrCreate(
             ['id' => 1],
             [
-                'email' => $request->email,
-                'host' => $request->host,
-                'username' => $request->username,
-                'password' => $request->password,
-                'port' => $request->port,
-                'encryption' => $request->encryption,
+                'site_name' => $request->site_name,
+                'layout' => $request->layout,
+                'contact_email' => $request->contact_email,
+                'contact_phone' => $request->contact_phone,
+                'contact_address' => $request->contact_address,
+                'map' => $request->map,
+                'currency_name' => $request->currency_name,
+                'currency_icon' => $request->currency_icon,
+                'time_zone' => $request->time_zone
             ]
         );
         toastr('Updated successfully!', 'success', 'Success');
