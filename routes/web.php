@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\PageController;
 use App\Http\Controllers\Frontend\PaymentController;
+use App\Http\Controllers\Frontend\ProductTrackController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserOrderController;
 use App\Http\Controllers\Frontend\UserVendorReqeustController;
@@ -81,7 +82,8 @@ Route::get('terms-and-conditions', [PageController::class, 'termsAndCondition'])
 /* Contact Routes */
 Route::get('contact', [PageController::class, 'contact'])->name('contact');
 Route::post('contact', [PageController::class, 'handleContactForm'])->name('handle-contact-form');
-
+/* Product Tracking Route */
+Route::get('product-tracking', [ProductTrackController::class, 'index'])->name('product-tracking.index');
 
 
 
