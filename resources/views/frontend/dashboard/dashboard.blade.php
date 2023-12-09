@@ -1,6 +1,6 @@
 @extends('frontend.dashboard.layouts.master')
 @section('title')
-{{$settings->site_name}} || e-Commerce HTML Template
+{{$settings->site_name}} || User Dashboard
 @endsection
 @section('content')
 <section id="wsus__dashboard">
@@ -13,42 +13,55 @@
           <div class="dashboard_content">
             <div class="wsus__dashboard">
               <div class="row">
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item red" href="dsahboard_order.html">
-                    <i class="far fa-address-book"></i>
+                <div class="col-xl-3 col-6 col-md-4">
+                  <a class="wsus__dashboard_item red" href="{{route('user.orders.index')}}">
+                    <i class="fas fa-cart-plus"></i>
                     <p>order</p>
+                    <h4 style="color:#ffff">{{$totalOrder}}</h4>
                   </a>
                 </div>
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item green" href="dsahboard_download.html">
+                <div class="col-xl-3 col-6 col-md-4">
+                  <a class="wsus__dashboard_item green" href="{{route('user.orders.index')}}">
                     <i class="fal fa-cloud-download"></i>
-                    <p>download</p>
+                    <p>Pending Orders</p>
+                    <h4 style="color:#ffff">{{$pendingOrder}}</h4>
                   </a>
                 </div>
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item sky" href="dsahboard_review.html">
+                <div class="col-xl-3 col-6 col-md-4">
+                    <a class="wsus__dashboard_item green" href="{{route('user.orders.index')}}">
+                      <i class="fal fa-cloud-download"></i>
+                      <p>Complete Orders</p>
+                      <h4 style="color:#ffff">{{$completeOrder}}</h4>
+                    </a>
+                  </div>
+                <div class="col-xl-3 col-6 col-md-4">
+                  <a class="wsus__dashboard_item sky" href="{{route('user.review.index')}}">
                     <i class="fas fa-star"></i>
-                    <p>review</p>
+                    <p>Reviews</p>
+                    <h4 style="color:#ffff">{{$reviews}}</h4>
                   </a>
                 </div>
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item blue" href="dsahboard_wishlist.html">
-                    <i class="far fa-heart"></i>
-                    <p>wishlist</p>
-                  </a>
-                </div>
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item orange" href="href="{{route('user.profile')}}">
-                    <i class="fas fa-user-shield"></i>
-                    <p>profile</p>
-                  </a>
-                </div>
-                <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item purple" href="dsahboard_address.html">
-                    <i class="fal fa-map-marker-alt"></i>
-                    <p>address</p>
-                  </a>
-                </div>
+                <div class="col-xl-3 col-6 col-md-4">
+                    <a class="wsus__dashboard_item purple" href="{{route('user.wishlist.index')}}">
+                      <i class="fas fa-star"></i>
+                      <p>Wishlist</p>
+                      <h4 style="color:#ffff">{{$wishlist}}</h4>
+                    </a>
+                  </div>
+                  <div class="col-xl-3 col-6 col-md-4">
+                    <a class="wsus__dashboard_item purple" href="{{route('user.address.index')}}">
+                      <i class="fal fa-map-marker-alt"></i>
+                      <p>address</p>
+                      <h4 style="color:#ffff">{{$addresses}}</h4>
+                    </a>
+                  </div>
+                  <div class="col-xl-3 col-6 col-md-4">
+                      <a class="wsus__dashboard_item orange" href="{{route('user.profile')}}">
+                        <i class="fas fa-user-shield"></i>
+                        <p>profile</p>
+                        <h4 style="color:#ffff">-</h4>
+                      </a>
+                  </div>
               </div>
 
             </div>
