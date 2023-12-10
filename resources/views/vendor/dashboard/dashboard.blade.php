@@ -9,16 +9,46 @@
             <div class="wsus__dashboard">
               <div class="row">
                 <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item red" href="dsahboard_order.html">
-                    <i class="far fa-address-book"></i>
-                    <p>order</p>
-                  </a>
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.orders.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Today's Orders</p>
+                      <h4 style="color:#ffff">{{$todaysOrder}}</h4>
+                    </a>
+                  </div>
+                  <div class="col-xl-2 col-6 col-md-4">
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.orders.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Td's Pending Orders</p>
+                      <h4 style="color:#ffff">{{$todaysPendingOrder}}</h4>
+                    </a>
                 </div>
                 <div class="col-xl-2 col-6 col-md-4">
-                  <a class="wsus__dashboard_item green" href="dsahboard_download.html">
-                    <i class="fal fa-cloud-download"></i>
-                    <p>download</p>
-                  </a>
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.orders.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Total Orders</p>
+                      <h4 style="color:#ffff">{{$totalOrder}}</h4>
+                    </a>
+                </div>
+                <div class="col-xl-2 col-6 col-md-4">
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.orders.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Total Pending Orders</p>
+                      <h4 style="color:#ffff">{{$totalPendingOrder}}</h4>
+                    </a>
+                </div>
+                <div class="col-xl-2 col-6 col-md-4">
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.orders.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Completed Orders</p>
+                      <h4 style="color:#ffff">{{$totalCompleteOrder}}</h4>
+                    </a>
+                </div>
+                <div class="col-xl-2 col-6 col-md-4">
+                    <a class="wsus__dashboard_item red" href="{{route('vendor.products.index')}}">
+                      <i class="fas fa-cart-plus"></i>
+                      <p>Total Products</p>
+                      <h4 style="color:#ffff">{{$totalProducts}}</h4>
+                    </a>
                 </div>
                 <div class="col-xl-2 col-6 col-md-4">
                   <a class="wsus__dashboard_item sky" href="dsahboard_review.html">
