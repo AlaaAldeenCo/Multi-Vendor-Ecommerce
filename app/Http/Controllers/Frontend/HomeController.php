@@ -10,12 +10,15 @@ use App\Models\HomePageSetting;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Slider;
 use App\Models\Vendor;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $sliders = Slider::where('status', 1)->orderBy('serial','asc')->get();
+
         $flashSaleDate = FlashSale::first();
         $flashSaleItems = FlashSaleItem::where('show_at_home', 1)->where('status', 1)->get();
         $popularCategory = HomePageSetting::where('key', 'popular_category_section')->first();
@@ -38,7 +41,7 @@ class HomeController extends Controller
         $homepage_secion_banner_four = json_decode($homepage_secion_banner_four?->value);
 
 
-        return view('frontend.home.home', compact ('flashSaleDate','flashSaleItems', 'popularCategory', 'brands',
+        return view('frontend.home.home', compact ('sliders', 'flashSaleDate','flashSaleItems', 'popularCategory', 'brands',
         'typeBaseProducts','categoryProductSliderSectionOne', 'categoryProductSliderSectionTwo',
         'categoryProductSliderSectionThree', 'homepage_secion_banner_one',
         'homepage_secion_banner_two', 'homepage_secion_banner_three',
