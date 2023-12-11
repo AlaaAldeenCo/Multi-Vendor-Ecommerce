@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
   <meta name="csrf-token" content="{{ csrf_token() }}" />
-  <title>General Dashboard &mdash; Stisla</title>
+  <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">
+  <title>General Dashboard</title>
 
   <!-- General CSS Files -->
   <link rel="stylesheet" href="{{asset('backend/assets/modules/bootstrap/css/bootstrap.min.css')}}">
@@ -89,7 +90,7 @@
   <script src="{{asset('backend/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
-  <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
+  {{-- <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script> --}}
 
   <!-- Template JS File -->
   <script src="{{asset('backend/assets/js/scripts.js')}}"></script>
