@@ -204,7 +204,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-md-7 col-lg-7">
+                    <div class="col-xl-7 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
                             <a class="title" href="javascript:;">{{$product->name}}</a>
                             @if ($product->qty > 0)
@@ -267,15 +267,6 @@
                                         @endforeach
                                     </div>
                                 </div>
-                                {{-- <div class="wsus_pro__det_size">
-                                    <h5>size :</h5>
-                                    <ul>
-                                        <li><a href="#">S</a></li>
-                                        <li><a href="#">M</a></li>
-                                        <li><a href="#">L</a></li>
-                                        <li><a href="#">XL</a></li>
-                                    </ul>
-                                </div> --}}
                                 <div class="wsus__quentity">
                                     <h5>quentity :</h5>
                                     <div class="select_number">
@@ -285,8 +276,8 @@
 
                                 <ul class="wsus__button_area">
                                     <li><button type="submit" class="add_cart" href="#">add to cart</button></li>
-                                    <li><a class="buy_now" href="#">buy now</a></li>
-                                    <li><a href="" class="add_to_wishlist" data-id="{{$product->id}}"><i class="fal fa-heart"></i></a></li>
+                                    {{-- <li><a class="buy_now" href="#">buy now</a></li> --}}
+                                    <li><a href="javascript:;" class="add_to_wishlist" data-id="{{$product->id}}"><i class="fal fa-heart"></i></a></li>
                                     {{-- <li><a href="#"><i class="far fa-random"></i></a></li> --}}
                                 </ul>
 
@@ -295,43 +286,7 @@
                             <p class="brand_model"><span>brand :</span> {{$product->brand->name}}</p>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
-                        <div class="wsus_pro_det_sidebar" id="sticky_sidebar">
-                            <ul>
-                                <li>
-                                    <span><i class="fal fa-truck"></i></span>
-                                    <div class="text">
-                                        <h4>Return Available</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                                <li>
-                                    <span><i class="far fa-shield-check"></i></span>
-                                    <div class="text">
-                                        <h4>Secure Payment</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                                <li>
-                                    <span><i class="fal fa-envelope-open-dollar"></i></span>
-                                    <div class="text">
-                                        <h4>Warranty Available</h4>
-                                        <!-- <p>Lorem Ipsum is simply dummy text of the printing</p> -->
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="wsus__det_sidebar_banner">
-                                <img src="images/blog_1.jpg" alt="banner" class="img-fluid w-100">
-                                <div class="wsus__det_sidebar_banner_text_overlay">
-                                    <div class="wsus__det_sidebar_banner_text">
-                                        <p>Black Friday Sale</p>
-                                        <h4>Up To 70% Off</h4>
-                                        <a href="#" class="common_btn">shope now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
             </div>
 
@@ -403,7 +358,7 @@
                                                     <p><span>Address:</span> {{$product->vendor->address}}</p>
                                                     <p><span>Phone:</span> {{$product->vendor->phone}}</p>
                                                     <p><span>mail:</span> {{$product->vendor->email}}</p>
-                                                    <a href="vendor_details.html" class="see_btn">visit store</a>
+                                                    {{-- <a href="vendor_details.html" class="see_btn">visit store</a> --}}
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">

@@ -75,57 +75,13 @@
                 <li class="text-center">Cart Is Empty!</li>
             @endif
 
-
-            {{-- <li>
-                <div class="wsus__cart_img">
-                    <a href="#"><img src="images/pro4.jpg" alt="product" class="img-fluid w-100"></a>
-                    <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                </div>
-                <div class="wsus__cart_text">
-                    <a class="wsus__cart_title" href="#">men's fashion casual watch</a>
-                    <p>$130</p>
-                </div>
-            </li>
-            <li>
-                <div class="wsus__cart_img">
-                    <a href="#"><img src="images/pro2.jpg" alt="product" class="img-fluid w-100"></a>
-                    <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                </div>
-                <div class="wsus__cart_text">
-                    <a class="wsus__cart_title" href="#">men's casual shoes</a>
-                    <p>$140 <del>$150</del></p>
-                </div>
-            </li>
-            <li>
-                <div class="wsus__cart_img">
-                    <a href="#"><img src="images/pro9.jpg" alt="product" class="img-fluid w-100"></a>
-                    <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                </div>
-                <div class="wsus__cart_text">
-                    <a class="wsus__cart_title" href="#">men's fashion casual sholder bag</a>
-                    <p>$140</p>
-                </div>
-            </li>
-            <li>
-                <div class="wsus__cart_img">
-                    <a href="#"><img src="images/tab_2.jpg" alt="product" class="img-fluid w-100"></a>
-                    <a class="wsis__del_icon" href="#"><i class="fas fa-minus-circle"></i></a>
-                </div>
-                <div class="wsus__cart_text">
-                    <a class="wsus__cart_title" href="#">apple 9.5" 7 serise tab with full view display</a>
-                    <p>$140 <del>$150</del></p>
-                </div>
-            {{-- </li> --}}
-            {{-- @if (Cart::content()->count() === 0)
-                <li class="text-center">Cart Is Empty!</li>
-            @endif --}}
         </ul>
         <div class="mini_cart_actions {{Cart::content()->count() === 0 ? 'd-none' : ''}}">
 
             <h5>sub total <span id ="mini_cart_subtotal">{{$settings->currency_icon}}{{getCartTotal()}}</span></h5>
             <div class="wsus__minicart_btn_area">
                 <a class="common_btn" href="{{route('cart-details')}}">view cart</a>
-                <a class="common_btn" href="check_out.html">checkout</a>
+                <a class="common_btn" href="{{route('user.checkout')}}">checkout</a>
             </div>
 
         </div>
