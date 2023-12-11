@@ -27,9 +27,9 @@
   <link rel="stylesheet" href="{{asset('backend/assets/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('backend/assets/css/components.css')}}">
 
-  {{-- @if($settings->layout === 'RTL')
+  @if($settings->layout === 'RTL')
   <link rel="stylesheet" href="{{asset('backend/assets/css/rtl.css')}}">
-  @endif --}}
+  @endif
 
 
 <!-- Start GA -->
@@ -89,7 +89,7 @@
   <script src="{{asset('backend/assets/modules/select2/dist/js/select2.full.min.js')}}"></script>
 
   <!-- Page Specific JS File -->
-  {{-- <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script> --}}
+  <script src="{{asset('backend/assets/js/page/index-0.js')}}"></script>
 
   <!-- Template JS File -->
   <script src="{{asset('backend/assets/js/scripts.js')}}"></script>

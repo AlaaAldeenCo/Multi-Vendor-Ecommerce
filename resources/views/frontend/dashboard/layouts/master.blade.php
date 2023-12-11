@@ -26,7 +26,9 @@
 
   <link rel="stylesheet" href="{{asset('frontend/css/style.css')}}">
   <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
-  {{-- <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}"> --}}
+  @if($settings->layout === 'RTL')
+    <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}">
+  @endif
 
   {{-- Toastr Library --}}
   <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

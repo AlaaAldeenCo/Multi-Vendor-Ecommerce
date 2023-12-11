@@ -4,6 +4,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
 use App\Models\GeneralSetting;
+use App\Models\LogoSetting;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 class AppServiceProvider extends ServiceProvider
@@ -25,12 +26,13 @@ class AppServiceProvider extends ServiceProvider
 
         /* Set Default Timezone */
         $generalSetting = GeneralSetting::first();
+        $logoSetting = LogoSetting::first();
         Config::set('app.timezone', $generalSetting->time_zone);
 
         /* Set Currency to be accessed by all blade files */
 
-        View::composer('*', function ($view) use ($generalSetting){
-            $view->with('settings', $generalSetting);
+        View::composer('*', function ($view) use ($generalSetting, $logoSetting){
+            $view->with(['settings' =>$generalSetting, 'logoSetting' => $logoSetting]);
         });
 
     }

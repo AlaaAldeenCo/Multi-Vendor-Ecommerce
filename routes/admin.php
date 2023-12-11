@@ -103,10 +103,11 @@ Route::resource('coupons', CouponController::class);
 /* Shipping Rule Routes */
 Route::put('shipping-rule/change-status',[ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
 Route::resource('shipping-rule', ShippingRuleController::class);
-/* General Setting Route */
+/* General Setting Routes */
 Route::get('settings',[SettingController::class,'index'])->name('settings.index');
 Route::put('general-setting-update', [SettingController::class, 'generalSettingUpdate'])->name('general-setting-update');
 Route::put('email-setting-update', [SettingController::class, 'emailConfigSettingUpdate'])->name('email-setting-update');
+Route::put('logo-setting-update', [SettingController::class, 'logoSettingUpdate'])->name('logo-setting-update');
 /* Payment Routes */
 Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
 Route::resource('paypal-setting', PaypalSettingController::class);

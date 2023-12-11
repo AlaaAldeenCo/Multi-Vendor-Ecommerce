@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
     <title>@yield('title')</title>
-    <link rel="icon" type="image/png" href="{{asset('frontend/images/favicon.png')}}">
+    <link rel="icon" type="image/png" href="{{asset($logoSetting->favicon)}}">
     <link rel="stylesheet" href="{{asset('frontend/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('frontend/css/select2.min.css')}}">
@@ -29,6 +29,11 @@
     <link rel="stylesheet" href="{{asset('frontend/css/responsive.css')}}">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     {{-- {{-- <!-- <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}"> --> --}}
+
+    @if($settings->layout === 'RTL')
+    <link rel="stylesheet" href="{{asset('frontend/css/rtl.css')}}">
+    @endif
+
 </head>
 
 <body>
