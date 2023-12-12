@@ -108,17 +108,14 @@ class BrandController extends Controller
         // dd($id);
 
         $brand = Brand::findOrFail($id);
+        if(Product::where('brand_id', $brand->id)->count() > 0)
+        {
+            return response(['status' => 'error', 'message'=> 'This brand has products you can\'t delete it.']);
+        }
         $this->deleteImage($brand->logo);
         $brand->delete();
 
         return response(['status' => 'success', 'Deleted Successfully!']);
-
-
-        // $brand = Brand::findOrFail($id);
-        // $this->deleteImage($brand->logo);
-        
-
-        // return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 
     public function changeStatus(Request $request)

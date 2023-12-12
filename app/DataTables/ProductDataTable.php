@@ -77,6 +77,9 @@ class ProductDataTable extends DataTable
                     </label>';
                 }
                 return $button;
+            })->addColumn('quantity', function($query)
+            {
+                return $query->qty;
             })
             ->rawColumns(['image', 'type', 'status', 'action'])
             ->setRowId('id');
@@ -121,6 +124,7 @@ class ProductDataTable extends DataTable
             Column::make('id'),
             Column::make('image'),
             Column::make('name'),
+            Column::make('quantity'),
             Column::make('price'),
             Column::make('type')->width(150),
             Column::make('status'),

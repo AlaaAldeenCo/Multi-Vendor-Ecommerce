@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\SubCategory;
 use App\Models\ChildCategory;
+use App\Models\OrderProduct;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Support\Facades\Auth;
 use Str;
@@ -168,6 +169,10 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         $product = Product::findOrFail($id);
+        if(OrderProduct::where('product_id', $product->id)->count() > 0)
+        {
+            return response(['status' => 'error', 'message' => 'This product have orders can\'t delete it.']);
+        }
         $this->deleteImage($product->thumb_image);
         $galleryImages=ProductImageGallery::where('product_id', $product->id)->get();
         foreach($galleryImages as $image)
